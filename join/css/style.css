@@ -21,18 +21,7 @@ li {
 }
 
 /* 
-.container-fluid {
-  height: 400px;
-  background-color: skyblue;
-}
-
-.row {
-  border: 1px solid teal;
-} 
-*/
-
-/* 
-ヘッダー1
+ページ上部のヘッダーバー
 */
 
 .header-bar {
@@ -71,11 +60,11 @@ li {
 }
 
 /* 
-ヘッダー2
+ヘッダー
 */
 
 .header-wrapper {
-  height: 700px;
+  height: 650px;
   background: url("../img/head1.png") no-repeat fixed center bottom / cover ;
   /*
   background-repeat
@@ -83,7 +72,6 @@ li {
   background-position
   */
   position: relative;
-  /* opacity: 0.5; */
 }
 
 .header-wrapperLogo {
@@ -113,10 +101,10 @@ li {
   border: 1px solid #777;
   border-radius: 5px;
   padding-bottom: 20px;
+  font-size: 80%;
 }
 
 .header-wrapperRegister form {
-  font-size: 90%;
   /* フォーム入力欄の拡張 h-wRegiで指定した500px以下 */
   width: 470px;
 }
@@ -170,22 +158,26 @@ FAQ画面
 */
 
 .intro-containerFAQ {
-
+  width: 100%;
 }
 
 .intro-containerFAQ h5 {
-  width: 80%;
+  max-width: 700px;
   margin: 0 auto;
   border-radius: 5px;
-  box-shadow: 0px 5px 10px rgba(0,0,0,0.2);
+  /* box-shadow: 0px 5px 10px rgba(0,0,0,0.2); */
+  letter-spacing: 1px;
+  border: 1px solid rgba(0,0,0,.125);
+  color: #333;
 }
 
 .intro-containerFAQ h5:hover {
   cursor: pointer;
 }
 
-.circle {
-  transform: rotate(180deg);
+.card-body {
+  max-width: 700px;
+  margin: 0 auto;
 }
 
 .fa-plus, .fa-minus {
@@ -193,36 +185,56 @@ FAQ画面
   float: right;
 }
 
-.intro-containerFAQAnswer {
-  width: 80%;
-  transition: 0.8s;
-  margin: 0 auto;
-  display: none;
+.circle {
+  transform: rotate(360deg);
 }
 
 .skelton {
   opacity: 0.01;
 }
 
-.card-body {
-  width: 80%;
-  margin: 0 auto;
-}
-
-
-
 
 /* 
 はじめてみよう
 */
 
+.getStartButtons {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10%;
+  width: 80%;
+}
 
+.getStartNote h6{
+  border-bottom: 1px dotted rgb(102, 194, 255);
+  text-align: center;
+}
 
+.getStartNote p {
+  text-align: center;
+}
 
 
 /* 
 プロフィール
 */
+
+
+.profile img {
+  width: 80%;
+  max-width: 400px;
+  border-radius: 10px;
+  margin-left: 10%;
+}
+
+.profile h6 {
+  font-weight: 600;
+}
+
+.profileTexts {
+  max-width: 80%;
+  margin: 0 auto;
+}
 
 
 /* 
@@ -245,4 +257,15 @@ footer{
 	text-align: center;
 	color: white;
   letter-spacing: 2px;
+}
+
+
+/* 
+--------------
+レスポンシブ(col-md基準)
+--------------
+*/
+
+@media screen and (max-width: 990px) {
+
 }

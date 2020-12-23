@@ -18,13 +18,13 @@ include('../app/_parts/_header.php');
 
     <ul class="header-barButtons">
       <li>
-        <a href="index.php" class="btn btn-primary btn-sm"><i class="fas fa-user-plus"></i>登録する</a>
+        <a href="index.php" class="btn btn-primary btn-sm" role="button"><i class="fas fa-user-plus"></i>登録する</a>
       </li>
       <li>
-        <a class="btn btn-primary btn-sm" href=""><i class="fas fa-sign-in-alt"></i>ログイン</a>
+        <a class="btn btn-primary btn-sm" role="button" href=""><i class="fas fa-sign-in-alt"></i>ログイン</a>
       </li>
       <li>
-        <a class="btn btn-success btn-sm" href=""><i class="fas fa-sign-in-alt"></i>お試しログイン</a>
+        <a class="btn btn-success btn-sm" role="button" href=""><i class="fas fa-sign-in-alt"></i>お試しログイン</a>
       </li>
     </ul>
 
@@ -84,7 +84,7 @@ include('../app/_parts/_header.php');
 </header>
 
 <section class="container intro-container pb-5">
-  <div class="intro-centerBar pt-3"></div>
+  <div class="intro-centerBar py-4"></div>
   <h4 class="my-3"><b>Likoとは</b></h4>
 
   <div class="row">
@@ -104,7 +104,7 @@ include('../app/_parts/_header.php');
 </section>
 
 <section class="intro-container pb-5 intro-containerBg">
-  <div class="intro-centerBar pt-3 border-white"></div>
+  <div class="intro-centerBar py-4 border-white"></div>
   <h4 class="my-3"><b>できること</b></h4>
 
   <div class="container">
@@ -129,108 +129,143 @@ include('../app/_parts/_header.php');
 </section>
 
 <section class="container intro-container pb-5">
-  <div class="intro-centerBar pt-3"></div>
+  <div class="intro-centerBar py-4"></div>
   <h4 class="my-3"><b>FAQ</b></h4>
 
-  <div class="row">
+  <section id="faq">
 
-    <div class="col-md-12 intro-containerFAQ">
-
-      <h5 class="py-3" id="test">
+    <div class="intro-containerFAQ col-md-12">
+      <h5 data-toggle="collapse" href="#collapseContent01" role="button" aria-expanded="false" aria-controls="collapseContent01" id="toggleIcon1" class="py-3">
         <b class="ml-3">このサイトについて</b>
-        <i class="fas fa-plus mr-3" id="FAQplus"></i>
-        <i class="fas fa-minus mr-3 skelton" id="FAQminus"></i>
+        <i class="fas fa-plus mr-3" id="plus1"></i>
+        <i class="fas fa-minus mr-3 skelton" id="minus1"></i>
       </h5>
 
-      <div class="intro-containerFAQAnswer mt-4" id="answer">
-        <p>ポートフォリオ用のSNSサイトとなります。</p>
-        <p>突然メンテナンスを行ったり、サービスが停止することがございます。ご了承ください。</p>
+      <div class="collapse" id="collapseContent01">
+        <div class="card card-body my-4">
+          <p>ポートフォリオ用のSNSサイトとなります。</p>
+          <p>突然メンテナンスを行ったり、サービスが停止することがございます。ご了承ください。</p>
+        </div>
+      </div>
+    </div>
+
+    <h2 style="color: white" >　</h2>
+  
+    <div class="intro-containerFAQ col-md-12">
+      <h5 data-toggle="collapse" href="#collapseContent02" role="button" aria-expanded="false" aria-controls="collapseContent02" id="toggleIcon2" class="py-3">
+        <b class="ml-3">情報の取扱い</b>
+        <i class="fas fa-plus mr-3" id="plus2"></i>
+        <i class="fas fa-minus mr-3 skelton" id="minus2"></i>
+      </h5>
+
+      <div class="collapse" id="collapseContent02">
+        <div class="card card-body my-4">
+          <p>
+           メールアドレスについては管理者から確認が可能です。<br>
+           メールアドレスはユーザーのログインのみにしか利用せず、管理者がその他の用途に利用することはありません。
+          </p>
+           <p>
+            パスワードはハッシュ関数「sha256」を利用した暗号化形式を採用し保存しています。<br>
+            管理者から確認することはできないような仕組みで管理しています。
+          </p>
+          <p>
+          自分のメールアドレスなどを利用せずにサービスを利用したい場合は、架空のアドレスを登録することでもサービスの利用が可能です。<br>
+          (ログイン時に利用しますので、忘れないように注意してください)
+          </p>
+        </div>
       </div>
 
     </div>
 
-  </div>
+    <h2 style="color: white" >　</h2>
+  
+    <div class="intro-containerFAQ col-md-12">
+      <h5 data-toggle="collapse" href="#collapseContent03" role="button" aria-expanded="false" aria-controls="collapseContent03" id="toggleIcon3" class="py-3">
+        <b class="ml-3">バグやエラーが発生した場合</b>
+        <i class="fas fa-plus mr-3" id="plus3"></i>
+        <i class="fas fa-minus mr-3 skelton" id="minus3"></i>
+      </h5>
+
+      <div class="collapse" id="collapseContent03">
+        <div class="card card-body my-4">
+          <p>下記のアドレスまで伝えて頂ければ幸いです。確認が出来次第、返信いたします。</p>
+          <p>email : skonishi1125@gmail.com</p>
+        </div>
+      </div>
+
+    </div>
+
+    <h2 style="color: white" >　</h2>
+
+  </section>
 
 </section>
-
-<!-- sampleというidの中でくくりができる -->
-<section id="sample">
-
-  <div class="intro-containerFAQ">
-    <h5 data-toggle="collapse" href="#collapseContent01" role="button" aria-expanded="false" aria-controls="collapseContent01" id="test2" class="py-2">
-      <b class="ml-3">このサイトについて</b>
-      <i class="fas fa-plus mr-3 plus" id="FAQplus2"></i>
-      <i class="fas fa-minus mr-3 skelton minus" id="FAQminus2"></i>
-    </h5>
-    <div class="collapse" id="collapseContent01">
-      <div class="card card-body my-4">コンテンツその１</div>
-    </div>
-  </div>
-
-
-
-  <div class="intro-containerFAQ">
-    <h5 data-toggle="collapse" href="#collapseContent02" role="button" aria-expanded="false" aria-controls="collapseContent02" id="test2" class="py-2">
-      <b class="ml-3">エラー発生時</b>
-      <i class="fas fa-plus mr-3 plus"></i>
-      <i class="fas fa-minus mr-3 skelton minus"></i>
-    </h5>
-    <div class="collapse" id="collapseContent02">
-      <div class="card card-body my-4">コンテンツその2</div>
-    </div>
-  </div>
-
-
-  
-  
-  <!-- <div class="intro-containerFAQ">
-    <p>
-      <a class="btn btn-primary" data-toggle="collapse" href="#collapseContent02" role="button" aria-expanded="false" aria-controls="collapseContent02">ボタン2</a>
-    </p>
-    <div class="collapse" id="collapseContent02" data-parent="#sample">
-      <div class="card card-body">コンテンツその2</div>
-    </div>
-  </div>
-  
-  <div class="intro-containerFAQ">
-    <p>
-      <a class="btn btn-primary" data-toggle="collapse" href="#collapseContent03" role="button" aria-expanded="false" aria-controls="collapseContent03">ボタン3</a>
-    </p>
-    <div class="collapse" id="collapseContent03" data-parent="#sample">
-      <div class="card card-body">コンテンツその3</div>
-    </div>
-  </div> -->
-
-</section>
-
-
-
-
-
 
 
 
 <section class="container intro-container pb-5">
-  <div class="intro-centerBar pt-3"></div>
+  <div class="intro-centerBar py-4"></div>
   <h4 class="my-3"><b>はじめてみよう</b></h4>
 
-  <div class="row">
+  <div class="row pt-4">
+    <div class="col-md-4">
+      <a href="index.php" class="btn btn-primary btn-sm getStartButtons" role="button"><i class="fas mr-1 fa-user-plus"></i>登録する</a>
+    </div>
+
+    <div class="col-md-4">
+      <a class="btn btn-primary btn-sm getStartButtons" role="button" href=""><i class="fas mr-1 fa-sign-in-alt"></i>ログイン</a>
+    </div>
+
+    <div class="col-md-4">
+      <a class="btn btn-success btn-sm getStartButtons" role="button" href=""><i class="fas mr-1 fa-sign-in-alt"></i>お試しログイン</a>
+    </div>
+
+  </div>
+
+  <div class="row mt-5 getStartNote">
+    <div class="col-md-12">
+      <h6 class="pb-2">お試しログイン機能について</h6>
+      <p>ユーザー登録作業をスキップし、テストアカウントでLikoへログインすることができます。</p>
+      <p>Likoの仕組みを確認したい場合はこちらでのログインをお試しください。</p>
+    </div>
 
   </div>
   
 </section>
 
 <section class="container intro-container pb-5">
-  <div class="intro-centerBar pt-3"></div>
+  <div class="intro-centerBar py-4"></div>
   <h4 class="my-3"><b>製作者プロフィール</b></h4>
 
-  <div class="row">
+  <div class="row profile pt-3">
+    <div class="col-md-6">
+      <img class="img-thumbnail" src="../img/profile.png" alt="profile">
+    </div>
+
+    <div class="col-md-6 profileTexts mt-3">
+      <h6>名前</h6>
+      <p>小西 慧(Satoru Konishi)<br>
+      1996年11月25日生まれ (2020年11月現在:24歳) </p>
+      <h6>趣味</h6>
+      <p>イラスト描画、ランニング、eSports</p>
+      <h6>SNS</h6>
+      <ul>
+          <li>
+            <p>Qiita<br>
+            <a href="https://qiita.com/skonishi1125">https://qiita.com/skonishi1125</a></p>
+          </li>
+          <li>
+            <p>Github<br>
+            <a href="https://github.com/skonishi1125/liko_re">https://github.com/skonishi1125/liko_re</a></p>
+          </li>
+        </ul>
+    </div>
     
   </div>
 
-  <button class="btn btn-primary">Topへ戻る</button>
   
 </section>
+
 
 <footer class="py-2">
   <div class="footer-logo">
