@@ -10,3 +10,26 @@
   <title>Liko</title>
 </head>
 <body>
+  <header class="container-fluid">
+    <div class="row header-bar">
+
+      <div class="header-barLogo">
+        <a href="index.php">
+          <img src="../img/yellowLogo.png" alt="Liko" class="header-barLogo ml-4 py-1">
+        </a>
+      </div>
+
+      <ul class="header-barButtons">
+        <li>
+          <a href="index.php" class="btn btn-primary btn-sm" role="button"><i class="fas fa-user-plus"></i>登録する</a>
+        </li>
+        <li>
+          <a class="btn btn-primary btn-sm" role="button" href=""><i class="fas fa-sign-in-alt"></i>ログイン</a>
+        </li>
+        <li>
+          <a class="btn btn-success btn-sm" role="button" href=""><i class="fas fa-sign-in-alt"></i>お試しログイン</a>
+        </li>
+      </ul>
+
+    </div> <!-- row header-bar -->
+  </header>

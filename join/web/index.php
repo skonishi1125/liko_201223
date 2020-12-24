@@ -1,5 +1,79 @@
 <?php
-// require('../app/functions.php');
+// 2階層上のappフォルダに取りに行く
+require('../../app/dbconnect.php');
+require('../app/functions.php');
+
+if(!empty($_POST)){
+  //フォームが空でなかった場合の処理
+  if($_POST['name'] == ''){
+    $error['name'] = 'blank';
+  }
+  if($_POST['email'] == ''){
+    $error['email'] = 'blank';
+  }
+  if(strlen($_POST['password']) < 4 ){
+    $error['password'] = 'length';
+  }
+  if($_POST['password'] == ''){
+    $error['password'] = 'blank';
+  }
+
+  //画像受け渡し。$_FILESという特別な変数を利用する
+  //$_FILE['formでつけたname=の名前']['元々用意された名前name,type,sizeなど']を指定できる
+  $fileName = $_FILES['image']['name'];
+  if(!empty($fileName)) {
+    $ext = substr($fileName, -4);
+    if($ext != '.jpg' && $ext !='.png' && $ext !='.PNG' && 
+    $ext !='.gif' && $ext != 'JPEG' && $ext != 'jpeg' && $ext != '.JPG') {
+      $error['image'] = 'type';
+    }
+
+  }
+
+  //$errorに何もない場合(重複の時！)
+  if(empty($error)){
+    $member = $db->prepare('SELECT COUNT(*) AS cnt FROM members WHERE email=?');
+    $member->execute(array($_POST['email']));
+    $record = $member->fetch();
+    if($record['cnt'] > 0){
+      $error['email'] = 'duplicate';
+    }
+  }
+
+  //$errorに何もない場合、エラーがなかった場合(checkへと進む処理)
+  if(empty($error)){
+    //画像アップ
+    $postImgTime = date('YmdHis');
+    if($ext == 'jpeg' || $ext == 'JPEG'){
+      $ext = '.' . $ext;
+    }
+    $image = $postImgTime . sha1($_FILES['image']['name']).$ext;
+
+    //ファイル名を分からなくする処理
+    move_uploaded_file($_FILES['image']['tmp_name'], '../member_picture/'.$image);
+    $_SESSION['join'] = $_POST;
+    $_SESSION['join']['image'] = $image;
+    $_SESSION['join']['time'] = $postImgTime;
+    //セッションにPOSTの値を保存して、次の画面へ
+    //imageはパス用の名前を保存、timeは画像の有無判定に使用する
+    header('Location:   check.php');
+    exit();
+  }
+}
+
+// 書き直しの処理
+if ($_REQUEST['action'] == 'rewrite') {
+  $_POST = $_SESSION['join'];
+  $back['rewrite'] = true;
+} else {
+  $back['rewrite'] = false;
+}
+
+
+// エラーチェック
+foreach ($error as $key => $e) {
+  echo "$errorの中身：" . $key . ":" . $e." |";
+}
 
 include('../app/_parts/_header.php');
 
@@ -7,29 +81,58 @@ include('../app/_parts/_header.php');
 
 <!-- HTML
 --------------------------------------->
-<header class="container-fluid">
-  <div class="row header-bar">
 
-    <div class="header-barLogo">
-      <a href="index.php">
-        <img src="../img/yellowLogo.png" alt="Liko" class="header-barLogo ml-4 py-1">
-      </a>
+<!-- 
+入力エラー時に出現させるモーダル
+ -->
+ <?php if (!empty($error)) : ?>
+  
+  <div class="modal-bgBlack" id="modalBackGround"></div>
+  <nav class="modal-container alert alert-light alert-dismissible fade show" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="closeModal">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <h5 class="alert-heading modal-title pb-2 mb-2">入力に不備がありました。</h5>
+    <!-- 名前エラー -->
+    <?php if ($error['name'] == 'blank') : ?>
+      <p>・ユーザーネームを入力してください。</p>
+    <?php endif; ?>
+    <!-- メールエラー -->
+    <?php if ($error['email'] == 'blank') : ?>
+      <p>・メールアドレスを入力してください。</p>
+    <?php endif; ?>
+    <?php if ($error['email'] == 'duplicate') : ?>
+      <p>
+        ・既に使用されているメールアドレスです。<br>
+        　重複して登録することはできません。
+      </p>
+    <?php endif; ?>
+    <!-- パスワード(４文字以下)エラー -->
+    <?php if ($error['password'] == 'length') : ?>
+      <p>・パスワードは4文字以上としてください。</p>
+    <?php endif; ?>
+    <!-- パスワード未記入エラー -->
+    <?php if ($error['password'] == 'blank') : ?>
+      <p>・パスワードを入力してください。</p>
+    <?php endif; ?>
+    <!-- 拡張子エラー -->
+    <?php if ($error['image'] == 'type') : ?>
+      <p>
+        ・拡張子「<?php echo $ext; ?>」のファイルが指定されています。<br>
+        　本サービスのアイコン画像は、「.jpg」「.png」ファイルのみの対応となります。
+        </p>
+    <?php endif; ?>
     </div>
+  </nav>
 
-    <ul class="header-barButtons">
-      <li>
-        <a href="index.php" class="btn btn-primary btn-sm" role="button"><i class="fas fa-user-plus"></i>登録する</a>
-      </li>
-      <li>
-        <a class="btn btn-primary btn-sm" role="button" href=""><i class="fas fa-sign-in-alt"></i>ログイン</a>
-      </li>
-      <li>
-        <a class="btn btn-success btn-sm" role="button" href=""><i class="fas fa-sign-in-alt"></i>お試しログイン</a>
-      </li>
-    </ul>
+  <?php endif; ?> <!-- if (!empty($error)) -->
+  
+  
 
-  </div> <!-- row header-bar -->
 
+
+
+<header>
   <div class="row header-wrapper">
     <div class="header-wrapperLogo">
       <img src="../img/whiteLogo.png" alt="Liko">
@@ -45,20 +148,20 @@ include('../app/_parts/_header.php');
 
       <!-- ユーザー名 -->
       <div class="form-group">
-        <label for="user"><b>ユーザー名</b></label>
-        <input id="user" type="text" class="form-control" placeholder="test">
+        <label for="name"><b>ユーザー名</b></label>
+        <input name="name" id="name" type="text" class="form-control" placeholder="Name" value="<?= h($_POST['name']); ?>">
       </div>
 
       <!-- メールアドレス -->
       <div class="form-group">
         <label for="email"><b>メールアドレス</b></label>
-        <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="sample@gmail.com">
+        <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="sample@gmail.com" value=" <?= h($_POST['email']); ?>">
         <small id="emailHelp" class="form-text text-muted mb-2">ログイン情報としてのみ利用します。</small>
 
       <!-- パスワード -->
       <div class="form-group">
         <label for="password"><b>パスワード</b></label>
-        <input name="password" type="password" class="form-control" id="password" aria-describedby="passHelp" placeholder="****">
+        <input name="password" type="password" class="form-control" id="password" aria-describedby="passHelp" placeholder="****" value="<?= h($_POST['password']); ?>">
         <small id="passHelp" class="form-text text-muted">4文字以上としてください。</small>
       </div>
 
@@ -72,6 +175,11 @@ include('../app/_parts/_header.php');
           未記入の場合、デフォルト画像が設定されます。<br>
           画像の拡張子は「.jpg」「.png」「.gif」が設定可能です。
         </small>
+        <!-- 書き直し処理時の注意事項 -->
+        <?php if ($back['rewrite'] == true || empty($error) ) : ?>
+          <small class="text-danger">※恐れ入りますが、画像を改めて指定してください</small>
+        <?php endif; ?>
+
       </div>
 
       <button type="submit" class="btn btn-primary btn-sm float-right">入力内容を確認する</button>
@@ -82,6 +190,7 @@ include('../app/_parts/_header.php');
 
   </div> <!-- row header-wrapperRegister -->
 </header>
+
 
 <section class="container intro-container pb-5">
   <div class="intro-centerBar py-4"></div>
@@ -263,8 +372,9 @@ include('../app/_parts/_header.php');
     
   </div>
 
-  
 </section>
+
+
 
 
 <footer class="py-2">
@@ -280,4 +390,30 @@ include('../app/_parts/_header.php');
 
 <?php
 include('../app/_parts/_footer.php');
+
+// モーダルめも
+/*
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">ボタンです</button>
+<nav class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">タイトル</h5>
+        <!-- 閉じるアイコン -->
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- モーダル 本文 -->
+      <div class="modal-body">本文が入ります</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+*/
+
 ?>

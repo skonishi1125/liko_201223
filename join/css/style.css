@@ -6,6 +6,7 @@
 body {
   box-sizing: border-box;
   height: 1000px;
+  position: relative;
 }
 
 p, a {
@@ -19,6 +20,38 @@ a:hover {
 li {
   list-style: none;
 }
+
+/* 
+入力エラー用のモーダル
+*/
+
+.modal-bgBlack {
+  position: fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 10;
+  transition: 0.8s;
+}
+
+.modal-container {
+  position: fixed;
+  top: 50px;
+  width: 50%;
+  margin-left: 25%;
+  min-height: 300px;
+  z-index: 15;
+}
+
+.modal-title {
+  text-align: center;
+  border-bottom: 1px dotted #999;
+}
+
+
 
 /* 
 ページ上部のヘッダーバー
@@ -120,7 +153,6 @@ li {
 */
 
 .intro-container {
-  /* background-color: skyblue; */
   height: auto;
 }
 
@@ -258,6 +290,47 @@ footer{
 	color: white;
   letter-spacing: 2px;
 }
+
+
+/* 
+--------------
+check.php
+--------------
+*/
+
+.check-wrapper {
+  margin-top: 150px;
+  border: 2px solid rgba(255,205,73,1);
+  border-radius: 10px;
+  box-shadow: 10px 10px 20px rgba(196, 194, 122, 0.4);
+  max-width: 600px;
+}
+
+.check-wrapperTitle {
+  text-align: center;
+  border-bottom: 1px dotted rgb(102, 194, 255);
+}
+
+.check-wrapper h5 {
+  font-weight: 600;
+}
+
+.check-buttons {
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* 
+--------------
+thanks.php
+--------------
+*/
+
+.thanksText {
+  text-align: center;
+}
+
+
 
 
 /* 

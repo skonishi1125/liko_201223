@@ -16,10 +16,20 @@
   document.getElementById('toggleIcon2').addEventListener('click', () => {
     toggleIcon('plus2','minus2');
   });
-  
+
   document.getElementById('toggleIcon3').addEventListener('click', () => {
     toggleIcon('plus3','minus3');
   });
+
+  // modalの黒背景を閉じる処理
+  // xボタン
+  document.getElementById('closeModal').addEventListener('click', () => {
+    document.getElementById('modalBackGround').classList.add('d-none');
+  });
+  // 黒背景
+  // document.getElementById('modalBackGround').addEventListener('click', () => {
+  //   document.getElementById('modalBackGround').classList.add('d-none');
+  // });
 
 }
 
