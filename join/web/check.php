@@ -17,7 +17,8 @@ $defHash = "da39a3ee5e6b4b0d3255bfef95601890afd80709";
 //選択していない場合は日付 + defHashの値となる
 if($_SESSION['join']['image'] != $_SESSION['join']['time'].$defHash){
   $imageName = $_SESSION['join']['image'];
-  list($width, $height, $type, $attr) = getimagesize('../member_picture/'.$imageName);
+  list($width, $height, $type, $attr) = getimagesize('../../member_picture/'.$imageName);
+
 
   $newWidth = 0;//新横幅
   $newHeight = 0;//新縦幅
@@ -29,7 +30,7 @@ if($_SESSION['join']['image'] != $_SESSION['join']['time'].$defHash){
       $newWidth = $w;
       $newHeight = $height * ($w / $width);
     } else if($h < $w) {
-      $newWidth = $width * ($h / height);
+      $newWidth = $width * ($h / $height);
       $newHeight = $h;
     }else{
       if($width < $height){
@@ -63,44 +64,55 @@ if($_SESSION['join']['image'] != $_SESSION['join']['time'].$defHash){
       $newHeight = $height;
   }
 
+
+  // // 関数使用
+  // $ans = iconResize($width, $height);
+  // // 値の格納
+  // $newWidth = (int)ans[0];//新横幅
+  // $newHeight = (int)ans[1];//新縦幅
+
+  // 4文字の拡張子調整
   $ext = substr($imageName,-4);
   if($ext == 'jpeg' || $ext == 'JPEG'){
-      $ext = '.' . $ext;
+    $ext = '.' . $ext;
   }
 }
 
 //画像リサイズ
 if($ext == '.gif'){
-    $baseImage = imagecreatefromgif('../member_picture/'.htmlspecialchars($imageName,ENT_QUOTES));
-    $image = imagecreatetruecolor($newWidth, $newHeight);
-    imagecopyresampled($image, $baseImage, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
-    imagegif($image, '../member_picture/'.htmlspecialchars($imageName,ENT_QUOTES));
+  $baseImage = imagecreatefromgif('../../member_picture/'.h($imageName));
+  $image = imagecreatetruecolor($newWidth, $newHeight);
+  imagecopyresampled($image, $baseImage, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+  imagegif($image, '../../member_picture/'.h($imageName));
 }else if($ext == '.png' || $ext == '.PNG'){
-    $baseImage = imagecreatefrompng('../member_picture/'.htmlspecialchars($imageName,ENT_QUOTES));
-    $image = imagecreatetruecolor($newWidth, $newHeight);
-    imagecopyresampled($image, $baseImage, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
-    imagepng($image, '../member_picture/'.$imageName);
+  $baseImage = imagecreatefrompng('../../member_picture/'.h($imageName));
+  $image = imagecreatetruecolor($newWidth, $newHeight);
+  imagecopyresampled($image, $baseImage, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+  imagepng($image, '../../member_picture/'.$imageName);
 }else if($ext == '.jpg' || $ext == '.jpeg' || $ext == '.JPG' || $ext == '.JPEG'){
-    $baseImage = imagecreatefromjpeg('../member_picture/'.htmlspecialchars($imageName,ENT_QUOTES));
-    $image = imagecreatetruecolor($newWidth, $newHeight);
-    imagecopyresampled($image, $baseImage, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
-    imagejpeg($image, '../member_picture/'.htmlspecialchars($imageName,ENT_QUOTES));
+  $baseImage = imagecreatefromjpeg('../../member_picture/'.h($imageName));
+  $image = imagecreatetruecolor($newWidth, $newHeight);
+  imagecopyresampled($image, $baseImage, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+  imagejpeg($image, '../../member_picture/'.h($imageName));
 }
 
 //登録処理
 if(!empty($_POST)) {
-    $statement = $db->prepare('INSERT INTO members SET name=?,email=?,password=?,picture=?, session_id=?, created=NOW()');
-    $ret = $statement->execute(array(
-      $_SESSION['join']['name'],
-      $_SESSION['join']['email'],
-      hash('sha256',$_SESSION['join']['password']),
-      $_SESSION['join']['image'],
-      hash('sha256',$_SESSION['join']['email']),
-    ));
-    unset($_SESSION['join']);
+  $statement = $db->prepare('INSERT INTO members SET name=?,email=?,password=?,picture=?, session_id=?, created=NOW()');
+  $ret = $statement->execute(array(
+    $_SESSION['join']['name'],
+    $_SESSION['join']['email'],
+    hash('sha256',$_SESSION['join']['password']),
+    $_SESSION['join']['image'],
+    hash('sha256',$_SESSION['join']['email']),
+  ));
+  unset($_SESSION['join']);
 
-    header('Location: http://localhost:8888/liko_201223/join/web/thanks.php');
-    exit();
+  // thanks.phpにURL直移入で繋げなくする処理
+  $_SESSION['thanks'] = "true";
+
+  header('Location: http://localhost:8888/liko_201223/join/web/thanks.php');
+  exit();
 }
 
 include('../app/_parts/_header.php');
@@ -122,7 +134,9 @@ include('../app/_parts/_header.php');
       <p><?php echo h($_SESSION['join']['email']); ?></p>
       <h5 class="py-3">パスワード</h5>
       <p>表示されません(暗号化されて格納されます)。</p>
-      <h5 class="py-3">アイコン画像</h5><?php if($_SESSION['join']['image'] != $_SESSION['join']['time'].$defHash) :?><img class="iconImg" src="../member_picture/<?php echo h($_SESSION['join']['image']); ?>">
+      <h5 class="py-3">アイコン画像</h5>
+      <?php if($_SESSION['join']['image'] != $_SESSION['join']['time'].$defHash) :?>
+        <img class="img-thumbnail check-iconImg" src="../../member_picture/<?php echo h($_SESSION['join']['image']); ?>">
       <p><br>
       アイコンは画像の中心から切り抜かれます。</p><?php else: ?>
       <p>設定されていません。<br>

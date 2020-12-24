@@ -53,7 +53,7 @@ if(!empty($_POST)){
     $image = $postImgTime . sha1($_FILES['image']['name']).$ext;
 
     //ファイル名を分からなくする処理
-    move_uploaded_file($_FILES['image']['tmp_name'], '../member_picture/'.$image);
+    move_uploaded_file($_FILES['image']['tmp_name'], '../../member_picture/'.$image);
     $_SESSION['join'] = $_POST;
     $_SESSION['join']['image'] = $image;
     $_SESSION['join']['time'] = $postImgTime;
@@ -74,9 +74,9 @@ if ($_REQUEST['action'] == 'rewrite') {
 
 
 // エラーチェック
-foreach ($error as $key => $e) {
-  echo "$errorの中身：" . $key . ":" . $e." |";
-}
+// foreach ($error as $key => $e) {
+//   echo "$errorの中身：" . $key . ":" . $e." |";
+// }
 
 include('../app/_parts/_header.php');
 
@@ -122,7 +122,7 @@ include('../app/_parts/_header.php');
     <?php if ($error['image'] == 'type') : ?>
       <p>
         ・拡張子「<?php echo $ext; ?>」のファイルが指定されています。<br>
-        　本サービスのアイコン画像は、「.jpg」「.png」ファイルのみの対応となります。
+        　本サービスのアイコン画像は、「.jpg」「.png」「.gif」ファイルのみの対応となります。
         </p>
     <?php endif; ?>
     </div>
@@ -179,7 +179,7 @@ include('../app/_parts/_header.php');
           画像の拡張子は「.jpg」「.png」「.gif」が設定可能です。
         </small>
         <!-- 書き直し処理時の注意事項 -->
-        <?php if ($back['rewrite'] == true || empty($error) ) : ?>
+        <?php if ($back['rewrite'] == true || !empty($error) ) : ?>
           <small class="text-danger">※恐れ入りますが、画像を改めて指定してください</small>
         <?php endif; ?>
 

@@ -320,6 +320,13 @@ check.php
   text-align: center;
 }
 
+.check-iconImg {
+  object-fit: cover;
+  width:80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
 /* 
 --------------
 thanks.php
