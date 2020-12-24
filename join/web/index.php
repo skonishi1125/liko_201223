@@ -1,6 +1,9 @@
 <?php
+session_start();
+
 // 2階層上のappフォルダに取りに行く
 require('../../app/dbconnect.php');
+
 require('../app/functions.php');
 
 if(!empty($_POST)){
@@ -56,7 +59,7 @@ if(!empty($_POST)){
     $_SESSION['join']['time'] = $postImgTime;
     //セッションにPOSTの値を保存して、次の画面へ
     //imageはパス用の名前を保存、timeは画像の有無判定に使用する
-    header('Location:   check.php');
+    header('Location: http://localhost:8888/liko_201223/join/web/check.php');
     exit();
   }
 }
