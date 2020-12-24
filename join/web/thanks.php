@@ -4,7 +4,7 @@ require('../app/functions.php');
 
 if ($_SESSION['thanks'] != 'true') {
   header('Location: http://localhost:8888/liko_201223/join/web/index.php');
-  exit;
+  exit();
 }
 
 unset($_SESSION['thanks']);

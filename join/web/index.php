@@ -160,6 +160,7 @@ include('../app/_parts/_header.php');
         <label for="email"><b>メールアドレス</b></label>
         <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="sample@gmail.com" value=" <?= h($_POST['email']); ?>">
         <small id="emailHelp" class="form-text text-muted mb-2">ログイン情報としてのみ利用します。</small>
+        </div>
 
       <!-- パスワード -->
       <div class="form-group">

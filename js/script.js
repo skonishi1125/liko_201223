@@ -1,3 +1,4 @@
+// メインのscript.js
 'use strict';
 
 {
