@@ -202,6 +202,10 @@ index.php
   max-width: 175px;
 }
 
+.userName {
+  font-weight: bold;
+}
+
 .leftFix-userPost img {
   width: 40px;
   height: 40px;
@@ -270,7 +274,6 @@ index.php
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  margin-left: 25%;
 }
 
 /* 投稿内容 */
@@ -287,6 +290,11 @@ index.php
 .dotLine {
   width: 100%;
   border-bottom: 1px dotted #888;
+}
+
+/* 投稿内容(画像、動画) */
+.tweetContents-media {
+  text-align: center;
 }
 
 /* 投稿のリアクション*/
@@ -308,3 +316,61 @@ index.php
   font-size: 12px;
 }
 
+
+/* 
+投稿に対してのコメント表示
+*/
+
+
+
+.comment-wrapper img {
+  object-fit: cover;
+  width:50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.comment-border{
+  border: 2px solid rgba(255,205,73,1);
+  border-radius: 10px;
+  position: relative;
+}
+
+.borderTriangle{
+  position: absolute;
+  top:-41px;
+  width: 0px;
+  height: 0px;
+  border:20px solid rgba(255,205,73,1);
+  border-top: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-left: 20px solid transparent;
+}
+
+.borderTriWhite{
+  position: absolute;
+  top:-37px;
+  width: 0px;
+  height: 0px;
+  border:20px solid rgba(255,255,255,1);
+  border-top: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-left: 20px solid transparent;
+}
+
+/* 
+ページネーション
+*/
+
+.page-wrapper ul {
+  justify-content: center;
+}
+
+
+/* 
+フッタークレジット
+*/
+
+.footer-credit {
+  text-align: center;
+}

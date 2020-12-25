@@ -19,6 +19,8 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time() ) {
 }
 
 
+
+
 include('../app/_parts/_header.php');
 
 ?>
@@ -62,7 +64,7 @@ include('../app/_parts/_header.php');
     <?php else: ?>
       <img class="iconImg img-thumbnail" src="../member_picture/<?php echo h($member['picture']); ?>">
     <?php endif; ?>
-      <p class="userName"><?php echo h($member['name']); ?></p>
+      <p><b><?php echo h($member['name']); ?></b></p>
       <a class="openCommentModal btn btn-primary" role="button">投稿する</a>
     </div>
   
@@ -112,15 +114,15 @@ include('../app/_parts/_header.php');
       <section class="container-fluid tweetContents-user">
 
         <div class="row">
-          <div class="col-md-2">
+          <div class="col-md-2 text-md-center">
             <img class="img-thumbnail" src="../member_picture/user.png">
           </div>
 
           <div class="col-md-10">
-            <nobr class="userName">かあビス</nobr>
-            <a class="res-phone" href="view.php?id=">Post ID:[100]</a>
+            <span><b>かあビス</b></span>
+            <a href="view.php?id=">Post ID:[100]</a>
             <br>
-            <nobr class="createTime res-phone">[2020-12-13 20:17:53]</nobr>
+            <span>[2020-12-13 20:17:53]</span>
           </div>
         </div>
 
@@ -174,7 +176,41 @@ include('../app/_parts/_header.php');
 
 
 
-  
+
+
+
+
+
+
+
+
+
+  <!-- 
+    投稿に対するコメント
+   -->
+  <main class="comment-wrapper container-fluid">
+    <article class="col-md-9 offset-md-3 comment-border">
+      <!-- コメント欄の吹き出し部分 --> 
+      <div class="borderTriangle"></div>
+      <div class="borderTriWhite"></div>
+
+      <div class="row my-3">
+        <div class="col-md-2 text-md-center">
+          <img class="iconImg img-thumbnail" src="../member_picture/user.png">
+        </div>
+
+        <div class="col-md-10">
+          <span class="font-weight-bold">Kirbis</span>
+          <span>[2020-12-13 20:17:53]</span>
+          <p>ダミーテキストです。ダミーテキストです。ダミーテキストです。ダミーテキストです。ダミーテキストです。ダミーテキストです。ダミーテキストです。ダミーテキストです。</p>
+        </div>
+      </div>
+
+    </article>
+  </main>
+
+
+
 
   <!-- 
    ユーザー投稿（画像ありver)
@@ -187,15 +223,15 @@ include('../app/_parts/_header.php');
       <section class="container-fluid tweetContents-user">
 
         <div class="row">
-          <div class="col-md-2">
+          <div class="col-md-2 text-md-center">
             <img class="img-thumbnail" src="../member_picture/user.png">
           </div>
 
           <div class="col-md-10">
-            <nobr class="userName">かあビス</nobr>
-            <a class="res-phone" href="view.php?id=">Post ID:[100]</a>
+            <span><b>かあビス</b></span>
+            <a href="view.php?id=">Post ID:[100]</a>
             <br>
-            <nobr class="createTime res-phone">[2020-12-13 20:17:53]</nobr>
+            <span>[2020-12-13 20:17:53]</span>
           </div>
         </div>
 
@@ -206,10 +242,24 @@ include('../app/_parts/_header.php');
       <section class="col-md-12 tweetContents-post">
         <h4 class="pb-1 mb-2">タイトル</h4>
 
-        <div class="col-md-12">
-          <p>投稿メッセージです！！！！投稿メッセージです！！！！投稿メッセージです！！！！投稿メッセージです！！！！投稿メッセージです！！！！投稿メッセージです！！！！投稿メッセージです！！！！投稿メッセージです！！！！投稿メッセージです！！！！投稿メッセージです！！！！投稿メッセージです！！！！投稿メッセージです！！！！投稿メッセージです！！！！投稿メッセージです！！！！投稿メッセージです！！！！投稿メッセージです！！！！</p>
-          <div class="dotLine my-3 pt-3"></div>
+        <div class="row">
+          <!-- 投稿文章 -->
+          <div class="col-md-6">
+            <p>投稿メッセージです  投稿メッセージです投稿メッセージです投稿メッセージです投稿メッセージです投稿メッセージです投稿メッセージです投稿メッセージです投稿メッセージです投稿メッセージです投稿メッセージです投稿メッセージです投稿メッセージです投稿メッセージです投稿メッセージです投稿メッセージです</p>
+            <div class="dotLine my-3 pt-3"></div>
+          </div>
+
+          <!-- 投稿コンテンツ -->
+          <div class="col-md-6 tweetContents-media">
+            <img src="../post_picture/201222_2.png" alt="postpicture" class="img-thumbnail">
+            <img src="../post_picture/20200824160001D4717526-AEE4-4D82-9F32-D54B5A96C11A.jpeg" alt="postpicture" class="img-thumbnail">
+            <div class="embed-responsive embed-responsive-16by9">
+              <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/6DpudRojTB4" allowfullscreen></iframe>
+            </div>
+
+          </div>
         </div>
+
       </section>
 
       <!-- 投稿のリアクション -->
@@ -236,15 +286,34 @@ include('../app/_parts/_header.php');
             <button class="btn btn-outline-primary btn-sm ml-1">
               <i class="fas fa-trash"></i>
             </button>
-
           </div>
         </div>
 
       </section>
 
-
     </article><!-- tweetContents -->
   </main><!-- tweet-wrapper -->
+
+  <!-- 
+    ページネーション
+   -->
+
+  <nav class="col-md-10 offset-md-2 page-wrapper" aria-label="ページネーション">
+    <ul class="pagination">
+      <li class="page-item"><a class="page-link">前</a></li>
+      <li class="page-item"><a class="page-link">1</a></li>
+      <li class="page-item"><a class="page-link">2</a></li>
+      <li class="page-item"><a class="page-link">次</a></li>
+    </ul>
+  </nav>
+
+  <!-- 
+    フッタークレジット
+   -->
+
+  <footer class="col-md-10 offset-md-2 footer-credit mt-5">
+    <p>©️2020-2021 skonishi.</p>
+  </footer>
 
 
 </div> <!-- container-fluid -->
