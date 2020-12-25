@@ -6,7 +6,6 @@
 
 body {
   box-sizing: border-box;
-  height: 1000px;
   position: relative;
 }
 
@@ -115,6 +114,197 @@ index.php
   text-align: center;
 }
 
-.indexHeader-logo{
+.indexHeader-logo {
   height: 30px;
 }
+
+.leftFix-contents {
+  position: relative;
+  height: 300px;
+  display: inline;
+}
+
+.leftFix-configMenus {
+  position: fixed;
+  top: 50px;
+  width: 15%;
+  max-width: 175px;
+}
+
+.leftFix-menusBorder {
+  border-bottom: 1px dotted rgba(88,117,198,1);
+  margin-top: 5px;
+}
+
+.leftFix-configMenus a {
+  display: block;
+  font-weight: bold;
+  padding: 20px 0;
+}
+
+.leftFix-configMenus a:hover {
+  transition: background-color 0.5s ease 0s;
+  background-color: rgba(88,117,198,0.2);
+  border-radius: 20px;
+  text-decoration: none;
+}
+
+.leftFix-configMenus i {
+  margin: 0 10px;
+}
+
+.leftFix-searchForm {
+  margin-top: 20px;
+}
+
+.leftFix-searchForm p {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.searchForm {
+  position: relative;
+  width: 80%;
+}
+
+.searchIcon {
+  color: rgba(88,117,198,1);
+  position: absolute;
+  top: 3px;
+  right: -20px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  appearance: none;	
+  padding-top: 3px;
+}
+
+.searchIcon:hover {
+  color: rgba(120,150,230,1);
+}
+
+.searchBox {
+  width: 100%;
+  border:2px solid rgba(88,117,198,1);
+  border-radius: 5px;
+}
+
+.leftFix-userPost {
+  border-top: 1px dotted rgba(88,117,198,1);
+  background-color: white;
+  text-align: center;
+  padding-bottom: 40px;
+  padding-top: 20px;
+  position: fixed;
+  bottom: 0px;
+  width: 15%;
+  max-width: 175px;
+}
+
+.leftFix-userPost img {
+  width: 40px;
+  height: 40px;
+}
+
+.iconImg{
+  object-fit: cover;
+  width:80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+
+/* 
+エラーアラート
+*/
+
+.error-wrapperLength {
+  max-width: 83%;
+}
+
+/* 
+ ログインユーザーへの挨拶
+*/
+
+.userGreeting {
+  border-bottom: 1px solid #888;
+}
+
+.userGreeting img {
+  object-fit: cover;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+
+/* 
+ユーザー投稿
+*/
+
+.container-fluid {
+  max-width: 1400px;
+}
+
+.tweet-wrapper {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+.tweetContents {
+  margin-top: 40px;
+  padding-bottom: 10px;
+  border: 2px solid rgba(88,117,198,1);
+  border-radius: 5px;
+}
+
+/* ユーザー名、postID、投稿時間 */
+
+.tweetContents-user {
+  display: inline;
+}
+
+.tweetContents-user img {
+  object-fit: cover;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-left: 25%;
+}
+
+/* 投稿内容 */
+
+.tweetContents-post {
+  
+}
+
+.tweetContents-post h4 {
+  border-bottom: 1px solid #888;
+  font-weight: 500;
+}
+
+.dotLine {
+  width: 100%;
+  border-bottom: 1px dotted #888;
+}
+
+/* 投稿のリアクション*/
+
+.tweetContents-reaction {
+  position: relative;
+}
+
+.tweetContents-reaction textarea {
+  font-size: 80%;
+  height: 80px;
+}
+
+.comment-postButton {
+  position: absolute;
+  top: 50px;
+  right: -115px;
+  z-index: 2;
+  font-size: 12px;
+}
+
