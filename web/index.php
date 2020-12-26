@@ -562,7 +562,7 @@ include('../app/_parts/_header.php');
             <span><b><?= h($post['name']); ?></b></span>
             <a href="view.php?id=<?= h($post['id']); ?>">Post ID:[<?= h($post['id']); ?>]</a>
             <br>
-            <span><?= h($post['created']); ?></span>
+            <span><small>[<?= h($post['created']); ?>]</small></span>
           </div>
         </div>
 
@@ -592,6 +592,7 @@ include('../app/_parts/_header.php');
               <div class="form-group">
                 <textarea name="review" id="commentForm" class="form-control" placeholder="コメントを記入する..."></textarea>
               </div>
+              <input type="hidden" name="postid" value="<?php echo h($post['id']); ?>">
               <button type="submit" class="btn btn-success btn-sm comment-postButton">コメントを送信</button>
             </form>
           </div>
@@ -654,7 +655,7 @@ include('../app/_parts/_header.php');
             <span><b><?= h($post['name']); ?></b></span>
             <a href="view.php?id=<?= h($post['id']); ?>">Post ID:[<?= h($post['id']); ?>]</a>
             <br>
-            <span><?= h($post['created']); ?></span>
+            <span><small>[<?= h($post['created']); ?>]</small></span>
           </div>
         </div>
 
@@ -703,6 +704,7 @@ include('../app/_parts/_header.php');
               <div class="form-group">
                 <textarea name="review" id="commentForm" class="form-control" placeholder="コメントを記入する..."></textarea>
               </div>
+              <input type="hidden" name="postid" value="<?php echo h($post['id']); ?>">
               <button type="submit" class="btn btn-success btn-sm comment-postButton">コメントを送信</button>
             </form>
           </div>
@@ -737,6 +739,9 @@ include('../app/_parts/_header.php');
 
   <?php endif; ?> <!-- if (empty($post['post_pic']) && empty($post['video']) ) -->
 
+
+
+
   <!-- 
     投稿に対するコメント
    -->
@@ -754,13 +759,25 @@ include('../app/_parts/_header.php');
 
       <div class="row my-3">
         <div class="col-md-2 text-md-center">
+        <?php 
+          $iconExt = substr($revPost['picture'],-4);
+          if ($iconExt != 'jpeg' && $iconExt != '.png' && $iconExt != '.PNG'
+          && $iconExt != 'JPEG' && $iconExt != '.gif' && $iconExt != '.jpg'
+          && $iconExt != '.JPG' ) :
+        ?>
           <img class="iconImg img-thumbnail" src="../member_picture/user.png">
+          <?php else : ?>
+            <img class="iconImg img-thumbnail" src="../member_picture/<?= h($revPost['picture']);?>">
+          <?php endif; ?>
         </div>
 
         <div class="col-md-10">
-          <span class="font-weight-bold">Kirbis</span>
-          <span>[2020-12-13 20:17:53]</span>
-          <p>ダミーテキストです。ダミーテキストです。ダミーテキストです。ダミーテキストです。ダミーテキストです。ダミーテキストです。ダミーテキストです。ダミーテキストです。</p>
+          <span class="font-weight-bold"><?= h($revPost['name']); ?></span>
+          <span><small>[<?= h($revPost['created']); ?>]</small></span>
+          <a class="btn btn-outline-primary btn-sm ml-2" role="button" href="delete.php?id=<?= h($post['id']); ?>">
+                <i class="fas fa-trash mr-2"></i>削除する
+          </a>
+          <p><?= nl2br(makeLink(h($revPost['comment']) ) ); ?></p>
         </div>
       </div>
 

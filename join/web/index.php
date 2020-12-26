@@ -326,11 +326,11 @@ include('../app/_parts/_header.php');
     </div>
 
     <div class="col-md-4">
-      <a class="btn btn-primary btn-sm getStartButtons" role="button" href=""><i class="fas mr-1 fa-sign-in-alt"></i>ログイン</a>
+      <a class="btn btn-primary btn-sm getStartButtons" role="button" href="../../web/login.php"><i class="fas mr-1 fa-sign-in-alt"></i>ログイン</a>
     </div>
 
     <div class="col-md-4">
-      <a class="btn btn-success btn-sm getStartButtons" role="button" href=""><i class="fas mr-1 fa-sign-in-alt"></i>お試しログイン</a>
+      <a class="btn btn-success btn-sm getStartButtons" role="button" href="../../app/testLogin.php"><i class="fas mr-1 fa-sign-in-alt"></i>お試しログイン</a>
     </div>
 
   </div>
