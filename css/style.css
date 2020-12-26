@@ -170,30 +170,6 @@ index.php
   font-size: 12px;
 }
 
-
-/* .searchIcon {
-  color: rgba(88,117,198,1);
-  position: absolute;
-  top: 3px;
-  right: -20px;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  outline: none;
-  appearance: none;
-  padding-top: 3px;
-}
-
-.searchIcon:hover {
-  color: rgba(120,150,230,1);
-}
-
-.searchBox {
-  width: 100%;
-  border:2px solid rgba(88,117,198,1);
-  border-radius: 5px;
-} */
-
 .leftFix-userPost {
   border-top: 1px dotted rgba(88,117,198,1);
   background-color: white;
@@ -220,6 +196,22 @@ index.php
   width:80px;
   height: 80px;
   border-radius: 50%;
+}
+
+/* 
+ユーザー投稿フォーム(modal)
+*/
+#userPost-modal h5{
+  font-weight: 550;
+  margin-left: 27%;
+}
+
+.userPost-modalForm {
+  font-size: 90%;
+}
+
+.userPost-modalForm label {
+  font-weight: 550;
 }
 
 

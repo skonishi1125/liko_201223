@@ -31,7 +31,7 @@ if (!empty($_POST)) {
   $videoURL = substr($_POST['video'], 0, 23);
   $mobileURL = substr($_POST['video'], 0, 21);
   $videoID = substr($_POST['video'], -13);
-  $v = substr(h($post['video']), -11);
+  $v = substr(h($_POST['video']), -11);
   //https://www.youtube.com
 
   if (!empty($videoURL)) {
@@ -309,15 +309,13 @@ if (isset($_REQUEST['good'])) {
   $good = $db->prepare('UPDATE posts SET good=?, modified=NOW() WHERE id=?');
   $defGood = $defGood + 1;
   echo $retGood = $good->execute(array(
-    $defGood,
-    $_REQUEST['good'],
+    $defGood, $_REQUEST['good'],
   ));
 
   //いいねテーブルへの格納
   $goodState = $db->prepare('INSERT INTO goods SET member_id=?, post_id=?,created=NOW()');
   echo $goodRet = $goodState->execute(array(
-    $member['id'],
-    $_REQUEST['good'],
+    $member['id'], $_REQUEST['good'],
   ));
 
   //echo $goodRetを使わない場合はこちらを採用する　$goodRet = $goodState->fetch();
@@ -387,7 +385,7 @@ include('../app/_parts/_header.php');
           <input type="submit" value="&#xf002;" class="fas searchIcon"> -->
 
           <div class="input-group">
-            <input type="text" class="form-control searchBox" placeholder="Search for..." aria-label="キーワード" aria-describedby="basic-addon" name="search">
+            <input type="text" class="form-control searchBox" placeholder="Search for..." aria-label="キーワード" aria-describedby="basic-addon" name="search" value="">
             <div class="input-group-append">
               <button class="btn btn-primary btn-sm p-0" type="submit"><i class="fas fa-search"></i></button>
             </div>
@@ -409,10 +407,73 @@ include('../app/_parts/_header.php');
       <img class="iconImg img-thumbnail" src="../member_picture/<?php echo h($member['picture']); ?>">
     <?php endif; ?>
       <p><b><?php echo h($member['name']); ?></b></p>
-      <a class="openCommentModal btn btn-primary" role="button">投稿する</a>
+      <a class="openCommentModal btn btn-primary" role="button" data-toggle="modal" data-target="#userPost-modal">投稿する</a>
     </div>
   
   </nav> <!-- leftFix-contents -->
+
+  <!-- 
+    投稿モーダル
+   -->
+
+   <nav class="modal fade" id="userPost-modal" tabindex="-1" role="dialog" aria-labelledby="userPost-modal" aria-hidden="true">
+     <div class="modal-dialog modal-dialog-centered" role="document">
+       <div class="modal-content">
+          <div class="modal-header">
+
+            <h5 class="modal-title" id="userPost-modal">投稿する内容を記入</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+
+          </div>
+
+          <div class="modal-body container-fluid">
+            <form action="" method="post" enctype="multipart/form-data" class="userPost-modalForm">
+              <!-- タイトル -->
+              <div class="form-group">
+                <label for="title">タイトル</label>
+                <input type="text" class="form-control" id="title" name="title" value="<?= h($_POST['title']); ?>">
+              </div>
+
+              <!-- メッセージ(本文) -->
+              <div class="form-group">
+                <label for="message">メッセージ</label>
+                <span class="badge badge-primary">必須</span>
+                <textarea name="message" id="message" cols="50" rows="5" class="form-control" value="<?= h($_POST['message']); ?>"></textarea>
+              </div>
+
+              <input type="hidden" name="reply_post_id" value="<?php echo h($_REQUEST['res']); ?>">
+
+              <!-- 画像 -->
+              <div class="form-group">
+                <label for="postpic">添付画像を選択</label>
+                <input type="file" class="form-control-file" id="postpic" name="postpic">
+                <small id="postpicHelp" class="form-text text-muted">
+                投稿できる画像は「.jpg」「.png」「.gif」のファイルです。
+                </small>
+              </div>
+
+              <!-- 動画 -->
+              <div class="form-group">
+                <label for="video">URLでYouTubeの動画を紹介する</label>
+                <input type="text" class="form-control" id="video" name="video" value="<?= h($_POST['video']); ?>" placeholder="https://www.youtube.com/watch?v=ABCDEFGHIJ">
+                <small id="videoHelp" class="form-text text-muted">
+                  URLの末尾が"v=動画のID"で終わるように入力ください。
+                </small>
+              </div>
+
+              <button type="submit" class="btn btn-primary float-right">投稿</button>
+
+
+            </form>
+          </div>
+
+       </div>
+     </div>
+   </nav>
+
+
 
 
   <?php //いいね処理
@@ -676,12 +737,6 @@ include('../app/_parts/_header.php');
 
   <?php endif; ?> <!-- if (empty($post['post_pic']) && empty($post['video']) ) -->
 
-
-
-
-
-
-
   <!-- 
     投稿に対するコメント
    -->
@@ -714,10 +769,6 @@ include('../app/_parts/_header.php');
   <?php endforeach; ?> <!-- コメントに対してのforeach -->
 
   <?php endforeach; ?> <!-- 一つの投稿に対してのforeach -->
-
-
-
-
 
 
   <!-- 
