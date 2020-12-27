@@ -59,5 +59,13 @@ function iconResize($width, $height) {
 
 }
 
+function mt_rand_except( int $min, int $max, int $except ) : int {
+
+  do {
+      $num = mt_rand($min, $max);
+  } while ($num == $except);
+
+  return $num;
+}
 
 ?>

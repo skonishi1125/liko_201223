@@ -24,7 +24,7 @@
           <a href="index.php" class="btn btn-primary btn-sm" role="button"><i class="fas fa-user-plus"></i>登録する</a>
         </li>
         <li>
-          <a class="btn btn-primary btn-sm" role="button" href="../../web/login.php"><i class="fas fa-sign-in-alt"></i>ログイン</a>
+          <a class="btn btn-primary btn-sm" role="button" href="../../web/login.php"><i class="fas fa-sign-in-alt"></i>ログインする</a>
         </li>
         <li>
           <a class="btn btn-success btn-sm" role="button" href="../../app/testLogin.php"><i class="fas fa-sign-in-alt"></i>お試しログイン</a>

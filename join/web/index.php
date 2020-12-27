@@ -134,12 +134,12 @@ include('../app/_parts/_header.php');
   
 
 
-
+<?php $random = mt_rand(1,4); ?>
 
 <header>
-  <div class="row header-wrapper">
+  <div class="row header-wrapper" style="background-image: url('../img/head<?php echo $random ?>.png')">
     <div class="header-wrapperLogo">
-      <img src="../img/whiteLogo.png" alt="Liko">
+      <img src="../img/whiteLogo.png" alt="Liko" >
       <p>スキを共有しましょう</p>
     </div>
   </div>
@@ -210,7 +210,7 @@ include('../app/_parts/_header.php');
   <div class="collapse navbar-collapse" id="header-menus">
     <ul class="navbar-nav mr-auto navbar-contents">
       <li>
-        <a href="index.php"><i class="fas fa-user-plus"></i>登録する</a>
+        <a href="" role="button" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-user-plus"></i>登録する</a>
       </li>
 
       <li>
@@ -224,7 +224,73 @@ include('../app/_parts/_header.php');
   </div>
 </nav>
 
+<!-- 
+登録するをタップした際に出るモーダル
+ -->
 
+<nav class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title resRegister-modal-title" id="exampleModalLabel">ユーザー登録</h5>
+        <!-- 閉じるアイコン -->
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- モーダル 本文 -->
+      <div class="modal-body">
+
+        <form class="mt-2 ml-3" action="" method="post" enctype="multipart/form-data">
+
+          <!-- ユーザー名 -->
+          <div class="form-group">
+            <label for="name"><b>ユーザー名</b></label>
+            <input name="name" id="name" type="text" class="form-control" placeholder="Name" value="<?= h($_POST['name']); ?>">
+          </div>
+
+          <!-- メールアドレス -->
+          <div class="form-group">
+            <label for="email"><b>メールアドレス</b></label>
+            <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="sample@gmail.com" value=" <?= h($_POST['email']); ?>">
+            <small id="emailHelp" class="form-text text-muted mb-2">ログイン情報としてのみ利用します。</small>
+            </div>
+
+          <!-- パスワード -->
+          <div class="form-group">
+            <label for="password"><b>パスワード</b></label>
+            <input name="password" type="password" class="form-control" id="password" aria-describedby="passHelp" placeholder="****" value="<?= h($_POST['password']); ?>">
+            <small id="passHelp" class="form-text text-muted">4文字以上としてください。</small>
+          </div>
+
+          <!-- アイコン画像 -->
+          <div class="form-group">
+            <span class="badge badge-primary">任意</span>
+            <label for="image"><b>アイコン画像を選択</b></label>
+            <input name="image" type="file" class="form-control-file" id="image" aria-describedby="imageHelp">
+            <small id="imageHelp" class="form-text text-muted">
+              登録後に再設定が可能です。<br>
+              未記入の場合、デフォルト画像が設定されます。<br>
+              画像の拡張子は「.jpg」「.png」「.gif」が設定可能です。
+            </small>
+            <!-- 書き直し処理時の注意事項 -->
+            <?php if ($back['rewrite'] == true || !empty($error) ) : ?>
+              <small class="text-danger">※恐れ入りますが、画像を改めて指定してください</small>
+            <?php endif; ?>
+
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-sm float-right">入力内容を確認する</button>
+
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+      </div>
+    </div>
+  </div>
+</nav>
 
 
 
@@ -254,8 +320,9 @@ include('../app/_parts/_header.php');
 
 </section>
 
-<section class="intro-container pb-5 intro-containerBg">
-  <div class="intro-centerBar py-4 border-white"></div>
+<section class="intro-container pb-5 intro-containerBg" style="background-image: url('../img/head<?php print mt_rand_except( 1, 4, $random ); ?>.png')">
+<!-- <section class="intro-container pb-5 intro-containerBg bg-switcher"> -->
+<div class="intro-centerBar py-4 border-white"></div>
   <h4 class="my-3"><b>できること</b></h4>
 
   <div class="container">
@@ -332,7 +399,7 @@ include('../app/_parts/_header.php');
   
     <div class="intro-containerFAQ col-md-12">
       <h5 data-toggle="collapse" href="#collapseContent03" role="button" aria-expanded="false" aria-controls="collapseContent03" id="toggleIcon3" class="py-3">
-        <b class="ml-3">バグやエラーが発生した場合</b>
+        <b class="ml-3">不具合が発生した時</b>
         <i class="fas fa-plus mr-3" id="plus3"></i>
         <i class="fas fa-minus mr-3 skelton" id="minus3"></i>
       </h5>
@@ -359,12 +426,17 @@ include('../app/_parts/_header.php');
   <h4 class="my-3"><b>はじめてみよう</b></h4>
 
   <div class="row pt-4">
-    <div class="col-md-4">
+    <div class="col-md-4 noResponsive-registerbutton">
       <a href="index.php" class="btn btn-primary btn-sm getStartButtons" role="button"><i class="fas mr-1 fa-user-plus"></i>登録する</a>
     </div>
 
+    <!-- 画面幅767px以下の時に出るボタン -->
+    <div class="col-md-4 responsive-registerbutton">
+      <a href="" role="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary btn-sm getStartButtons" role="button"><i class="fas mr-1 fa-user-plus"></i>登録する</a>
+    </div>
+
     <div class="col-md-4">
-      <a class="btn btn-primary btn-sm getStartButtons" role="button" href="../../web/login.php"><i class="fas mr-1 fa-sign-in-alt"></i>ログイン</a>
+      <a class="btn btn-primary btn-sm getStartButtons" role="button" href="../../web/login.php"><i class="fas mr-1 fa-sign-in-alt"></i>ログインする</a>
     </div>
 
     <div class="col-md-4">

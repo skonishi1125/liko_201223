@@ -3,6 +3,8 @@
   margin: 0;
 }
 
+
+
 body {
   box-sizing: border-box;
   position: relative;
@@ -19,6 +21,7 @@ a:hover {
 li {
   list-style: none;
 }
+
 
 /* 
 入力エラー用のモーダル
@@ -100,8 +103,10 @@ li {
 
 .header-wrapper {
   height: 650px;
-  background: url("../img/head1.png") no-repeat fixed center bottom / cover ;
   margin: 0;
+  background: no-repeat fixed center bottom / cover ;
+ 
+  /* background: url("../img/head1.png") no-repeat fixed center bottom / cover ; */
   /*
   background-repeat
   background-attachment
@@ -183,8 +188,8 @@ li {
 */
 
 .intro-containerBg {
-  height: auto;
-  background: url("../img/head1.png") no-repeat fixed center bottom / cover;
+  /* height: auto; */
+  background: no-repeat fixed center bottom / cover;
   color: white;
 }
 
@@ -247,6 +252,10 @@ FAQ画面
 
 .getStartNote p {
   text-align: center;
+}
+
+.responsive-registerbutton {
+  display: none;
 }
 
 
@@ -351,6 +360,14 @@ thanks.php
 
 @media screen and (max-width: 767px) {
 
+  body {
+    
+  }
+
+  /* 
+  ヘッダーバーについて
+  */
+
   .header-bar {
     display: none;
   }
@@ -372,7 +389,7 @@ thanks.php
     transition: 0.5s;
   }
   
-  .navbar-contents a,i {
+  .navbar-contents a, .navbar-contents i {
     color: white;
   }
 
@@ -382,6 +399,74 @@ thanks.php
 
   .navbar-contents i {
     margin-right: 5px;
+  }
+
+  /*
+    ヘッダー(bg画像あり)の高さ
+  */
+
+  .header-wrapper {
+    height: 500px;
+  }
+
+  .header-wrapperLogo {
+    position: absolute;
+    left:40px;
+    bottom: 60px;
+    margin-left: 20px;
+    color: white;
+    text-align: center;
+  }
+  
+  .header-wrapperLogo img {
+    height: 60px;
+  }
+  /* 
+  FAQ
+  */
+
+  .intro-containerFAQ b {
+    font-size: 80%;
+  }
+
+  /*
+  エラーモーダル
+  */
+
+  .modal-container {
+    width: 95%;
+    min-height: 100px;
+    position: fixed;
+    top: 100px;
+    margin: 0 2.5%;
+    font-size: 80%;
+  }
+
+  .modal-title {
+    font-size: 14px;
+  }
+
+  /* 
+  登録モーダル
+  */
+
+  .resRegister-modal-title {
+    border: none;
+    font-size: 16px;
+    font-weight: 550;
+    margin-left: 20px;
+  }
+
+  /* 
+  はじめてみよう のボタン
+  */
+
+  .noResponsive-registerbutton {
+    display: none;
+  }
+
+  .responsive-registerbutton {
+    display: block;
   }
 
 
