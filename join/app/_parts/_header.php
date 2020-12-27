@@ -13,7 +13,7 @@
   <header class="container-fluid">
     <div class="row header-bar">
 
-      <div class="header-barLogo">
+      <div>
         <a href="index.php">
           <img src="../img/yellowLogo.png" alt="Liko" class="header-barLogo ml-4 py-1">
         </a>

@@ -5,7 +5,6 @@
 
 body {
   box-sizing: border-box;
-  height: 1000px;
   position: relative;
 }
 
@@ -56,6 +55,9 @@ li {
 /* 
 ページ上部のヘッダーバー
 */
+.resHeader-bar {
+  display: none;
+}
 
 .header-bar {
   background-color: white;
@@ -99,6 +101,7 @@ li {
 .header-wrapper {
   height: 650px;
   background: url("../img/head1.png") no-repeat fixed center bottom / cover ;
+  margin: 0;
   /*
   background-repeat
   background-attachment
@@ -273,21 +276,21 @@ FAQ画面
 フッター
 */
 
-footer{
-	background-color: rgb(247, 194, 51);
+footer {
+  background-color: rgb(247, 194, 51);
 }
 
 .footer-logo{
-	text-align: center;
+  text-align: center;
 }
 
 .footer-logo img{
-	height: 40px;
+  height: 40px;
 }
 
 .footer-container{
-	text-align: center;
-	color: white;
+  text-align: center;
+  color: white;
   letter-spacing: 2px;
 }
 
@@ -346,6 +349,62 @@ thanks.php
 --------------
 */
 
-@media screen and (max-width: 990px) {
+@media screen and (max-width: 767px) {
+
+  .header-bar {
+    display: none;
+  }
+
+  .header-wrapperRegister {
+    display: none;
+  }
+
+  .resHeader-bar {
+    display: flex;
+  }
+
+  .navbar-contents li {
+    padding: 5px 0;
+  }
+
+  .navbar-contents li:hover {
+    background-color: #474e57;
+    transition: 0.5s;
+  }
+  
+  .navbar-contents a,i {
+    color: white;
+  }
+
+  .navbar-contents a {
+    display: block;
+  }
+
+  .navbar-contents i {
+    margin-right: 5px;
+  }
+
+
+
+
+  footer {
+    background-color: #282C31;
+  }
+
+
+  .footer-logo img{
+    height: 30px;
+  }
+  
+  .footer-container{
+    text-align: center;
+    color: white;
+    letter-spacing: 1px;
+    font-size: 90%;
+  }
+
+  .footer-container p {
+    margin-bottom: 5px;
+  }
 
 }
