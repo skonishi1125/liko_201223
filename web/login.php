@@ -3,14 +3,16 @@ session_start();
 require('../app/dbconnect.php');
 require('../app/functions.php');
 
-//自動ログイン処理
+// 自動ログイン処理
+// 空の入力値のハッシュ
+// e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 if ($_COOKIE['sessionid'] != '') {
   $cookieLogin = $db->prepare('SELECT * FROM members WHERE session_id=?');
   $cookieLogin->execute(array($_COOKIE['sessionid']));
   $member = $cookieLogin->fetch();
 
+  $_POST['email'] = $member['email'];
   $_POST['save'] = 'on';
-  $_POST['email'] = $member['email'];//不要?
 
   if ($member) {
     $_SESSION['id'] = $member['id'];
@@ -24,7 +26,6 @@ if ($_COOKIE['sessionid'] != '') {
   }
 }
 
-// "ログイン"が押された時の処理
 if (!empty($_POST)) {
   // 両方のフォームが記入されている時
   if ($_POST['email'] != '' && $_POST['password'] != '') {
@@ -34,7 +35,7 @@ if (!empty($_POST)) {
       hash('sha256',$_POST['password']),
     ));
     $member = $login->fetch();
-
+  
     //ログイン成功
     if ($member) {
       $_SESSION['id'] = $member['id'];
@@ -42,23 +43,24 @@ if (!empty($_POST)) {
       $sessionid = hash('sha256', $_POST['email']);
       //自動ログインボックス有効時 onはinput value="on"で設定したから。
       if($_POST['save'] == 'on'){
-          setcookie('sessionid', $sessionid ,time()+60*60*24*14);
-          //直で2番目の値にhash関数を入れてはいけない
+        setcookie('sessionid', $sessionid ,time()+60*60*24*14);
+        //直で2番目の値にhash関数を入れてはいけない
       }
-
+  
       header('Location: http://localhost:8888/liko_201223/web/index.php');
       exit();
-
+  
       } else {
         $error['login'] = 'failed';
       }
-
+  
   // フォームに空白があった場合
   } else {
     $error['login'] = 'blank';
   }
 
 }
+
 
 
 include('../app/_parts/_header.php');
@@ -125,6 +127,7 @@ include('../app/_parts/_header.php');
   </div>
 
 </section>
+
 
 <?php
 include('../app/_parts/_footer.php');
