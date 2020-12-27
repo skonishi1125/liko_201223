@@ -68,28 +68,28 @@ include('../app/_parts/_header.php');
 ?>
 
 <header class="container-fluid">
-    <div class="row header-bar">
+  <div class="row header-bar">
 
-      <div class="header-barLogo">
-        <a href="../join/web/index.php">
-          <img src="../join/img/yellowLogo.png" alt="Liko" class="header-barLogo ml-4 py-1">
-        </a>
-      </div>
+    <div class="header-barLogo">
+      <a href="../join/web/index.php">
+        <img src="../join/img/yellowLogo.png" alt="Liko" class="header-barLogo ml-4 py-1">
+      </a>
+    </div>
 
-      <ul class="header-barButtons">
-        <li>
-          <a href="../join/web/index.php" class="btn btn-primary btn-sm" role="button"><i class="fas fa-user-plus"></i>登録する</a>
-        </li>
-        <li>
-          <a class="btn btn-primary btn-sm" role="button" href=""><i class="fas fa-sign-in-alt"></i>ログイン</a>
-        </li>
-        <li>
-          <a class="btn btn-success btn-sm" role="button" href="../app/testLogin.php"><i class="fas fa-sign-in-alt"></i>お試しログイン</a>
-        </li>
-      </ul>
+    <ul class="header-barButtons">
+      <li>
+        <a href="../join/web/index.php" class="btn btn-primary btn-sm" role="button"><i class="fas fa-user-plus"></i>登録する</a>
+      </li>
+      <li>
+        <a class="btn btn-primary btn-sm" role="button" href=""><i class="fas fa-sign-in-alt"></i>ログイン</a>
+      </li>
+      <li>
+        <a class="btn btn-success btn-sm" role="button" href="../app/testLogin.php"><i class="fas fa-sign-in-alt"></i>お試しログイン</a>
+      </li>
+    </ul>
 
-    </div> <!-- row header-bar -->
-  </header>
+  </div> <!-- row header-bar -->
+</header>
 
 
 <section class="container check-wrapper pb-5">
