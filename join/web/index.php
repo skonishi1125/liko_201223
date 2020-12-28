@@ -313,10 +313,12 @@ include('../app/_parts/_header.php');
     </div>
   
   </section>
+
+
   
-  <section class="intro-container pb-5 intro-containerBg" style="background-image: url('../img/head<?php print mt_rand_except( 1, 4, $random ); ?>.png')">
+  <section class="intro-container pb-5 intro-containerBg" style="background-image: url('../img/head<?php print ($random); ?>.png')">
   <!-- <section class="intro-container pb-5 intro-containerBg bg-switcher"> -->
-  <div class="intro-centerBar py-4 border-white"></div>
+    <div class="intro-centerBar py-4 border-white"></div>
     <h4 class="my-3"><b>できること</b></h4>
   
     <div class="container">

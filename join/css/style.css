@@ -205,7 +205,8 @@ li {
 
 .intro-containerBg {
   /* height: auto; */
-  background: no-repeat fixed center bottom / cover;
+  background-size: cover;
+  background-position: 50% 100%;
   color: white;
 }
 
@@ -420,14 +421,14 @@ thanks.php
   */
 
   .header-wrapper {
-    height: 40vh;
+    height: 55vh;
     width: 100%;
   }
 
   .header-wrapperLogo {
     position: absolute;
     left: 3vh;
-    bottom: 2vh;
+    bottom: 17vh;
     color: white;
     text-align: center;
   }
