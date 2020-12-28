@@ -91,6 +91,32 @@ include('../app/_parts/_header.php');
   </div> <!-- row header-bar -->
 </header>
 
+<!-- レスポンシブヘッダーバー -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top resHeader-bar login_thanks_checkbar">
+  <a href="../join/web/index.php">
+    <img src="../join/img/whiteLogo.png" alt="Liko" class="header-barLogo ml-4 py-1">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#header-menus" aria-expanded="false" aria-label="切り替え">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="header-menus">
+    <ul class="navbar-nav mr-auto navbar-contents">
+      <li>
+        <a href="../join/web/index.php"><i class="fas fa-user-plus"></i>登録する</a>
+      </li>
+
+      <li>
+        <a href=""><i class="fas fa-sign-in-alt"></i>ログインする</a>
+      </li>
+
+      <li>
+        <a href="../app/testLogin.php"><i class="fas fa-sign-in-alt testLogin"></i>お試しログイン</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
 
 <section class="container check-wrapper pb-5">
   <h5 class="py-3 check-wrapperTitle">ログインする</h5>

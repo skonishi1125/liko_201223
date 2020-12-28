@@ -228,7 +228,7 @@ include('../app/_parts/_header.php');
  -->
 
 <nav class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title resRegister-modal-title" id="exampleModalLabel">ユーザー登録</h5>

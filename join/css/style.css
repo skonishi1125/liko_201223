@@ -332,6 +332,7 @@ check.php
   border: 2px solid rgba(255,205,73,1);
   border-radius: 10px;
   box-shadow: 10px 10px 20px rgba(196, 194, 122, 0.4);
+  width: 90%;
   max-width: 600px;
 }
 
@@ -354,6 +355,11 @@ check.php
   width:80px;
   height: 80px;
   border-radius: 50%;
+}
+
+.login_thanks_checkbar {
+  margin-top: 0 !important;
+  margin-bottom: 30px;
 }
 
 /* 
@@ -528,5 +534,19 @@ thanks.php
   .footer-container p {
     margin-bottom: 5px;
   }
+
+  /* 
+  --------------
+  check.php
+  --------------
+  */
+
+  .check-wrapper {
+    margin-top: 0;
+  }
+
+
+
+
 
 }

@@ -23,7 +23,7 @@ li {
 
 /* 
 -----
-check.php
+login.php
 -----
  */
 
@@ -66,6 +66,10 @@ check.php
   margin-right: 0.5em;
 }
 
+.login_thanks_checkbar {
+  display: none;
+}
+
 /* 
 フォーム
 */
@@ -75,6 +79,7 @@ check.php
   border: 2px solid rgba(255,205,73,1);
   border-radius: 10px;
   box-shadow: 10px 10px 20px rgba(196, 194, 122, 0.4);
+  width: 95%;
   max-width: 600px;
 }
 
@@ -91,6 +96,9 @@ check.php
   margin: 0 auto;
   text-align: center;
 }
+
+
+
 
 
 
@@ -369,4 +377,64 @@ index.php
 
 .footer-credit {
   text-align: center;
+}
+
+/* 
+--------------
+レスポンシブ(col-md基準)
+--------------
+*/
+
+@media screen and (max-width: 767px) {
+
+  /* 
+  -----
+  login.php ヘッダーバー関連
+  -----
+  */
+  .header-bar {
+    display: none;
+  }
+
+  .check-wrapper {
+    margin-top: 50px;
+  }
+
+  .login_thanks_checkbar {
+    display: block;
+  }
+  .resHeader-bar {
+    display: flex;
+  }
+
+  .navbar-contents li {
+    padding: 5px 0;
+  }
+
+
+  .navbar-contents li:hover {
+    background-color: #474e57;
+    transition: 0.5s;
+  }
+  
+  .navbar-contents a, .navbar-contents i {
+    color: white;
+  }
+
+  .navbar-contents a {
+    display: block;
+  }
+
+  .navbar-contents i {
+    margin-right: 5px;
+  }
+
+  /* 
+  -----
+  index.php
+  -----
+  */
+
+
+
 }
