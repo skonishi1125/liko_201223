@@ -3,8 +3,6 @@
   margin: 0;
 }
 
-
-
 body {
   box-sizing: border-box;
   position: relative;
@@ -101,31 +99,49 @@ li {
 ヘッダー
 */
 
-.header-wrapper {
+/* .header-wrapper {
   height: 650px;
   margin: 0;
   background: no-repeat fixed center bottom / cover ;
- 
-  /* background: url("../img/head1.png") no-repeat fixed center bottom / cover ; */
-  /*
-  background-repeat
-  background-attachment
-  background-position
-  */
   position: relative;
+} */
+/* background: url("../img/head1.png") no-repeat fixed center bottom / cover ; */
+
+.header-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 650px;
+  width: 100%;
+  background-size: cover;
+  background-position: 50% 100%;
+  z-index: -1;
+  margin: 0;
 }
 
+.test {
+  margin-top: 650px;
+}
+
+.background-white {
+  background-color: white;
+}
+
+
+
+
+
+
 .header-wrapperLogo {
-	position: absolute;
-	left:70px;
-	bottom: 80px;
-  margin-left: 20px;
+  position: absolute;
+  left: 6vh;
+  bottom: 5vh;
   color: white;
-	text-align: center;
+  text-align: center;
 }
 
 .header-wrapperLogo img {
-  height: 80px;
+  height: 60px;
 }
 
 /* 
@@ -378,6 +394,8 @@ thanks.php
 
   .resHeader-bar {
     display: flex;
+    /* 背景画像のスペース */
+    margin-top: 90vh;
   }
 
   .navbar-contents li {
@@ -406,13 +424,13 @@ thanks.php
   */
 
   .header-wrapper {
-    height: 500px;
+    display: none;
   }
 
   .header-wrapperLogo {
     position: absolute;
-    left:40px;
-    bottom: 60px;
+    left: 2vh;
+    bottom: 14vh;
     margin-left: 20px;
     color: white;
     text-align: center;
@@ -421,6 +439,30 @@ thanks.php
   .header-wrapperLogo img {
     height: 60px;
   }
+
+  .resHeader-bgWrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+    background-position: 50% 100%;
+    z-index: -1;
+    margin: 0;
+    /* background: no-repeat fixed center bottom / cover ; */
+  }
+
+  .intro-container {
+    background-color: white;
+  }
+
+  .background-white {
+    background-color: white;
+  }
+
+
+
   /* 
   FAQ
   */
