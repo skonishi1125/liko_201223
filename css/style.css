@@ -137,6 +137,7 @@ index.php
   top: 50px;
   width: 15%;
   max-width: 175px;
+  font-size: 110%;
 }
 
 .leftFix-menusBorder {
@@ -315,9 +316,14 @@ index.php
 .comment-postButton {
   position: absolute;
   top: 50px;
-  right: -115px;
+  right: -87px;
   z-index: 2;
   font-size: 12px;
+}
+
+.reaction-space {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 
@@ -385,6 +391,13 @@ index.php
 --------------
 */
 
+@media screen and (max-width: 973px) {
+  /* leftFix-configMenusの文字調節用 */
+  .leftFix-configMenus {
+    font-size: 83%;
+  }
+}
+
 @media screen and (max-width: 767px) {
 
   /* 
@@ -435,6 +448,36 @@ index.php
   -----
   */
 
+  .leftFix-contents {
+    display: none;
+  }
 
+  .error-wrapperLength {
+    max-width: 100%;
+    margin-top: 50px !important;
+  }
+
+  .userGreeting {
+    margin-top: 25px;
+  }
+
+  .comment-postButton {
+    position: static;
+}
+
+/* 投稿のスペースUP */
+.tweet-wrapper {
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+.tweetContents {
+  margin-top: 20px;
+}
+
+.container-fluid  {
+  padding-left: 15px;
+  padding-right: 15px;
+}
 
 }

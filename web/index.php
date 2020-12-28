@@ -518,7 +518,7 @@ include('../app/_parts/_header.php');
    -->
 
   <nav class="userGreeting col-md-10 offset-md-2 pt-3">
-    <div class="mobileUser-container">
+    <div>
       <?php 
       if($iconExt != 'jpeg' && $iconExt != '.png' && $iconExt != '.PNG'
       && $iconExt != 'JPEG' && $iconExt != '.gif' && $iconExt != '.jpg'
@@ -593,11 +593,11 @@ include('../app/_parts/_header.php');
                 <textarea name="review" id="commentForm" class="form-control" placeholder="コメントを記入する..."></textarea>
               </div>
               <input type="hidden" name="postid" value="<?php echo h($post['id']); ?>">
-              <button type="submit" class="btn btn-success btn-sm comment-postButton">コメントを送信</button>
+              <button type="submit" class="btn btn-success btn-sm comment-postButton">コメントする</button>
             </form>
           </div>
 
-          <div class="col-md-2">
+          <div class="col-md-2 reaction-space">
             <!-- いいねボタン -->
 
             <?php $goodFlag = in_array($post['id'], $goodArray); ?>
@@ -612,7 +612,7 @@ include('../app/_parts/_header.php');
             <?php endif; ?>
 
             <?php if ($_SESSION['id'] == $post['member_id']) : ?>
-              <a class="btn btn-outline-primary btn-sm ml-1" role="button" href="delete.php?id=<?= h($post['id']); ?>">
+              <a class="btn btn-outline-primary btn-sm ml-2" role="button" href="delete.php?id=<?= h($post['id']); ?>">
                 <i class="fas fa-trash"></i>
               </a>
             <?php endif; ?>
@@ -705,11 +705,11 @@ include('../app/_parts/_header.php');
                 <textarea name="review" id="commentForm" class="form-control" placeholder="コメントを記入する..."></textarea>
               </div>
               <input type="hidden" name="postid" value="<?php echo h($post['id']); ?>">
-              <button type="submit" class="btn btn-success btn-sm comment-postButton">コメントを送信</button>
+              <button type="submit" class="btn btn-success btn-sm comment-postButton">コメントする</button>
             </form>
           </div>
 
-          <div class="col-md-2">
+          <div class="col-md-2 reaction-space">
             <!-- いいねボタン -->
 
             <?php $goodFlag = in_array($post['id'], $goodArray); ?>
@@ -724,7 +724,7 @@ include('../app/_parts/_header.php');
             <?php endif; ?>
 
             <?php if ($_SESSION['id'] == $post['member_id']) : ?>
-              <a class="btn btn-outline-primary btn-sm ml-1" role="button" href="delete.php?id=<?= h($post['id']); ?>">
+              <a class="btn btn-outline-primary btn-sm ml-2" role="button" href="delete.php?id=<?= h($post['id']); ?>">
                 <i class="fas fa-trash"></i>
               </a>
             <?php endif; ?>
