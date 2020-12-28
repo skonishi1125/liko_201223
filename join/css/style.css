@@ -99,13 +99,15 @@ li {
 ヘッダー
 */
 
-/* .header-wrapper {
+/* 
+.header-wrapper {
   height: 650px;
   margin: 0;
   background: no-repeat fixed center bottom / cover ;
+  background: url("../img/head1.png") no-repeat fixed center bottom / cover ;
   position: relative;
-} */
-/* background: url("../img/head1.png") no-repeat fixed center bottom / cover ; */
+} 
+*/
 
 .header-wrapper {
   position: fixed;
@@ -119,16 +121,13 @@ li {
   margin: 0;
 }
 
-.test {
+.header-wrapperSpace {
   margin-top: 650px;
 }
 
 .background-white {
   background-color: white;
 }
-
-
-
 
 
 
@@ -150,15 +149,16 @@ li {
 
 .header-wrapperRegister {
   position: absolute;
-  top: 120px;
-  right: 150px;
-  width:500px;
+  top: -550px;
+  right: 8vh;
+  width: 500px;
   height: auto;
   background-color: white;
   border: 1px solid #777;
   border-radius: 5px;
   padding-bottom: 20px;
   font-size: 80%;
+  z-index: 2;
 }
 
 .header-wrapperRegister form {
@@ -376,10 +376,6 @@ thanks.php
 
 @media screen and (max-width: 767px) {
 
-  body {
-    
-  }
-
   /* 
   ヘッダーバーについて
   */
@@ -395,7 +391,7 @@ thanks.php
   .resHeader-bar {
     display: flex;
     /* 背景画像のスペース */
-    margin-top: 90vh;
+    margin-top: 40vh;
   }
 
   .navbar-contents li {
@@ -424,14 +420,14 @@ thanks.php
   */
 
   .header-wrapper {
-    display: none;
+    height: 40vh;
+    width: 100%;
   }
 
   .header-wrapperLogo {
     position: absolute;
-    left: 2vh;
-    bottom: 14vh;
-    margin-left: 20px;
+    left: 3vh;
+    bottom: 2vh;
     color: white;
     text-align: center;
   }
@@ -441,10 +437,11 @@ thanks.php
   }
 
   .resHeader-bgWrapper {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
-    height: 100vh;
+    height: 90vh;
     width: 100%;
     background-size: cover;
     background-position: 50% 100%;
@@ -453,13 +450,10 @@ thanks.php
     /* background: no-repeat fixed center bottom / cover ; */
   }
 
-  .intro-container {
-    background-color: white;
+  .header-wrapperSpace {
+    margin: 0;
   }
-
-  .background-white {
-    background-color: white;
-  }
+  
 
 
 

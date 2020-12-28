@@ -144,21 +144,6 @@ include('../app/_parts/_header.php');
     </div>
   </div>
 
-  <!-- <section class="row resHeader-bgWrapper" style="background-image: url('../img/head<?php echo $random ?>.png')">
-  <div class="header-wrapperLogo">
-    <img src="../img/whiteLogo.png" alt="Liko" >
-    <p>スキを共有しましょう</p>
-  </div>
-</section> -->
-
-
-
-
-
-
-
-
-
   <div class="row header-wrapperRegister">
 
     <form class="mt-2 ml-3" action="" method="post" enctype="multipart/form-data">
@@ -210,14 +195,6 @@ include('../app/_parts/_header.php');
 
   </div> <!-- row header-wrapperRegister -->
 </header>
-
-<section class="row resHeader-bgWrapper" style="background-image: url('../img/head<?php echo $random ?>.png')">
-  <div class="header-wrapperLogo">
-    <img src="../img/whiteLogo.png" alt="Liko" >
-    <p>スキを共有しましょう</p>
-  </div>
-</section>
-
 
 
 <!-- レスポンシブヘッダーバー -->
@@ -314,8 +291,7 @@ include('../app/_parts/_header.php');
   </div>
 </nav>
 
-<div class="test"></div>
-
+<div class="header-wrapperSpace"></div>
 <div class="background-white">
   
   <section class="container intro-container pb-5">
