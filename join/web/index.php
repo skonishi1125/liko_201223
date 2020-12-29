@@ -285,7 +285,7 @@ include('../app/_parts/_header.php');
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">閉じる</button>
       </div>
     </div>
   </div>

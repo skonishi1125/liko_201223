@@ -372,10 +372,9 @@ index.php
 }
 
 .comment-deleteBtn {
-  padding-right: 0;
   position: relative;
-  right: 43px;
-  float: right;
+  right: 0px;
+  padding-right: 0px;
 }
 
 /* 
@@ -517,6 +516,7 @@ index.php
     margin-top: 20px;
     /* padding-left: 25px !important; */
   }
+  
 
   .container-fluid  {
     padding-left: 15px;
@@ -527,6 +527,14 @@ index.php
     padding-right: 0px;
     padding-left: 0px;
   }
+
+  .tweetContents-reaction h6{
+    display: none;
+  }
+
+  .tweetContents-reaction textarea {
+    height: 60px;
+}
 
   /* リアクションスペース */
 
@@ -541,10 +549,6 @@ index.php
     top: 0;
     left: 0;
     float: right;
-  }
-
-  .comment-deleteBtn {
-    position: static;
   }
 
   .comment-border{
@@ -584,6 +588,19 @@ index.php
   }
 
   /* 
+  レスポンシブアイコン変更、ログアウトモーダル
+   */
+
+   .configmodal-body a{
+    display: block;
+    font-weight: 600;
+    padding: 15px;
+   }
+
+
+
+
+  /* 
   投稿モーダルの大きさ調整
   */
 
@@ -612,6 +629,8 @@ index.php
     display: inline;
     background-color:#343A40;
   }
+
+  
 
 
 }

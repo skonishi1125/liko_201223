@@ -422,6 +422,10 @@ thanks.php
     margin-right: 5px;
   }
 
+  .modal-content {
+    font-size: 80%;
+  }
+
   /*
     ヘッダー(bg画像あり)の高さ
   */

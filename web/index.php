@@ -380,17 +380,12 @@ include('../app/_parts/_header.php');
       <div class="leftFix-searchForm">
         <p>投稿を検索する</p>
         <form class="searchForm" action="search.php" method="post">
-
-          <!-- <input name="search" type="text" class="searchBox">
-          <input type="submit" value="&#xf002;" class="fas searchIcon"> -->
-
           <div class="input-group">
             <input type="text" class="form-control searchBox" placeholder="Search for..." aria-label="キーワード" aria-describedby="basic-addon" name="search" value="">
             <div class="input-group-append">
               <button class="btn btn-primary btn-sm p-0" type="submit"><i class="fas fa-search"></i></button>
             </div>
           </div>
-
         </form>
       </div>
   
@@ -547,7 +542,7 @@ include('../app/_parts/_header.php');
       <section class="container-fluid tweetContents-user">
 
         <div class="row">
-          <div class="col-md-2 text-md-center">
+          <div class="col-auto text-md-center">
           <?php 
             $iconExt = substr($post['picture'],-4);
             if ($iconExt != 'jpeg' && $iconExt != '.png' && $iconExt != '.PNG'
@@ -560,7 +555,7 @@ include('../app/_parts/_header.php');
             <?php endif; ?>
           </div>
 
-          <div class="col-md-10">
+          <div class="col-auto">
             <span><b><?= h($post['name']); ?></b></span>
             <a href="view.php?id=<?= h($post['id']); ?>">Post ID:[<?= h($post['id']); ?>]</a>
             <br>
@@ -578,7 +573,6 @@ include('../app/_parts/_header.php');
 
         <div class="col-md-12">
           <p><?= nl2br(makeLink(h($post['message']) ) ); ?></p>
-          <div class="dotLine my-3 pt-3"></div>
         </div>
       </section>
 
@@ -640,7 +634,7 @@ include('../app/_parts/_header.php');
       <section class="container-fluid tweetContents-user">
 
         <div class="row">
-          <div class="col-md-2 text-md-center">
+          <div class="col-auto text-md-center">
           <?php 
             $iconExt = substr($post['picture'],-4);
             if ($iconExt != 'jpeg' && $iconExt != '.png' && $iconExt != '.PNG'
@@ -653,7 +647,7 @@ include('../app/_parts/_header.php');
             <?php endif; ?>
           </div>
 
-          <div class="col-md-10">
+          <div class="col-auto">
             <span><b><?= h($post['name']); ?></b></span>
             <a href="view.php?id=<?= h($post['id']); ?>">Post ID:[<?= h($post['id']); ?>]</a>
             <br>
@@ -672,9 +666,8 @@ include('../app/_parts/_header.php');
 
         <div class="row">
           <!-- 投稿文章 -->
-          <div class="col-md-6">
+          <div class="col-md-6 pb-3">
             <p><?= nl2br(makeLink(h($post['message']) ) ); ?></p>
-            <div class="dotLine my-3 pt-3"></div>
           </div>
 
           <!-- 投稿コンテンツ -->
@@ -760,7 +753,7 @@ include('../app/_parts/_header.php');
       <div class="borderTriWhite"></div>
 
       <div class="row my-3">
-        <div class="col-md-2 text-md-center">
+        <div class="col-auto text-md-center">
         <?php 
           $iconExt = substr($revPost['picture'],-4);
           if ($iconExt != 'jpeg' && $iconExt != '.png' && $iconExt != '.PNG'
@@ -773,7 +766,7 @@ include('../app/_parts/_header.php');
           <?php endif; ?>
         </div>
 
-        <div class="col-md-10">
+        <div class="col-auto">
           <span class="font-weight-bold"><?= h($revPost['name']); ?></span>
           <span><small>[<?= h($revPost['created']); ?>]</small></span>
           <?php if ($_SESSION['id'] == $revPost['member_id']) : ?>
@@ -842,15 +835,74 @@ include('../app/_parts/_header.php');
 
 <nav class="responsive-footerMenus bg-dark">
   <a href="index.php" class="text-white"><i class="fas fa-home"></i></a>
-  <a href="../app/logout.php" class="text-white"><i class="fas fa-search"></i></a>
-  <a href="changeIcon.php" class="text-white"><i class="fas fa-cog"></i></a>
+  <a data-toggle="modal" data-target="#searchModal" class="text-white"><i class="fas fa-search"></i></a>
+  <a data-toggle="modal" data-target="#configModal" class="text-white"><i class="fas fa-cog"></i></a>
   <a href="userpage.php" class="text-white"><i class="fas fa-user-alt"></i></a>
-
 </nav>
 
 <a class="btn btn-outline-primary responsive-postButton btn-lg" role="button" data-toggle="modal" data-target="#userPost-modal">
   <i class="fas fa-pencil-alt"></i>
 </a>
+
+<!-- 
+  レスポンシブ検索モーダル
+ -->
+
+<nav class="modal" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">検索する</h5>
+        <!-- 閉じるアイコン -->
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- モーダル 本文 -->
+      <div class="modal-body">
+
+        <form class="searchForm" action="search.php" method="post">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for..." aria-label="キーワード" aria-describedby="basic-addon" name="search" value="">
+            <div class="input-group-append">
+              <button class="btn btn-secondary btn-sm" type="submit"><i class="fas fa-search"></i></button>
+            </div>
+          </div>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">閉じる</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- 
+  レスポンシブアイコン変更、ログアウトモーダル
+ -->
+
+ <nav class="modal" id="configModal" tabindex="-1" role="dialog" aria-labelledby="configModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="configModalLabel">設定</h5>
+        <!-- 閉じるアイコン -->
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- モーダル 本文 -->
+      <div class="modal-body configmodal-body">
+        <a href="changeIcon.php" class="text-dark"><i class="fas fa-cog"></i>アイコンの変更</a>
+        <a href="../app/logout.php" class="text-dark"><i class="fas fa-sign-out-alt"></i>ログアウトする</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">閉じる</button>
+      </div>
+    </div>
+  </div>
+</nav>
 
 
 
@@ -859,19 +911,3 @@ include('../app/_parts/_header.php');
 include('../app/_parts/_footer.php');
 
 ?>
-
-<!-- 
-      <a href="index.php"><i class="fas fa-home"></i>ホーム</a>
-      <a href="userpage.php"><i class="fas fa-user-alt"></i>マイページ</a>
-      <a href="changeIcon.php"><i class="fas fa-cog"></i>アイコンの変更</a>
-      <a href="../app/logout.php"><i class="fas fa-sign-out-alt"></i>ログアウト</a>
-
-
-        <nav class="responsive-footerMenus">
-    <a class="btn btn-sm btn-dark" role="button" href="index.php"><i class="fas fa-home"></i></a>
-    <a class="btn btn-sm btn-dark" role="button" href="../app/logout.php"><i class="fas fa-sign-out-alt"></i></a>
-    <a class="btn btn-sm btn-dark" role="button" href="changeIcon.php"><i class="fas fa-cog"></i></a>
-    <a class="btn btn-sm btn-dark" role="button" href="userpage.php"><i class="fas fa-user-alt"></i></a>
-  </nav>
-
- -->
