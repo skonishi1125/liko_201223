@@ -25,9 +25,44 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time() ) {
 ----
 */
 
-$posts = $db->prepare('SELECT m.name, m.picture, p.* FROM members m, posts p WHERE m.id = p.member_id AND p.id=? ORDER BY p.created DESC');
-$posts->execute(array($_REQUEST['id']));
+//ページ分け
+$page = $_REQUEST['page'];
+if ($page == ''){
+  $page = 1;
+}
+//-の数対策
+$page = max($page, 1);
 
+//現在のページ数をセッションに格納(LIkeボタンを押下したときのlocationに使用する)
+$_SESSION['page'] = $page;
+
+//検索フォームの値
+if (!isset($_POST['search'])) {
+  $_POST['search'] = $_SESSION['searchWord'];
+} else {
+  $_SESSION['searchWord'] = $_POST['search'];
+}
+$searchWord = '%' . h($_POST['search']) . '%';
+
+$counts = $db->prepare('SELECT COUNT(*) AS cnt FROM posts WHERE message LIKE ? OR title LIKE ?');
+$counts->execute(array(
+    $searchWord, $searchWord
+));
+
+$cnt = $counts->fetch();
+$maxPage = ceil($cnt['cnt'] / 10);
+$page = min($page, $maxPage);
+$start = ($page - 1) * 10;
+
+if($start < 0){
+    $start = 0;
+}
+
+$posts = $db->prepare('SELECT m.name, m.picture, p.* FROM members m, posts p WHERE (m.id = p.member_id AND p.message LIKE ? ) OR (m.id = p.member_id AND p.title LIKE ?) ORDER BY p.created DESC  LIMIT ?, 10');
+$posts->bindParam(1,$searchWord);
+$posts->bindParam(2,$searchWord);
+$posts->bindParam(3,$start,PDO::PARAM_INT);
+$posts->execute();
 
 
 //返信
@@ -65,7 +100,9 @@ if (isset($_REQUEST['good'])) {
     $member['id'], $_REQUEST['good'],
   ));
 
-  header('Location: http://localhost:8888/liko_201223/web/view.php?id='. $_REQUEST['good']);
+  // いいねしたらそのページに飛ぶように修正 or いいねの仕組みを変える
+
+  header('Location: http://localhost:8888/liko_201223/web/search.php');
   exit();
 
 }
@@ -78,7 +115,7 @@ if (isset($_POST['review'])) {
       $member['id'], $_POST['postid'], $member['picture'], $_POST['review'],
     ));
 
-    header('Location: http://localhost:8888/liko_201223/web/view.php?id=' . $_REQUEST['id']);
+    header('Location: http://localhost:8888/liko_201223/web/search.php');
     exit();
     //これないと更新するたび増えていく
   }else{
@@ -111,7 +148,7 @@ include('../app/_parts/_header.php');
   <img src="../join/img/whiteLogo.png" alt="liko" class="indexHeader-logo">
 </header>
 
-<div class="container-fluid mt-5">
+<div class="container-fluid">
   <nav class="col-md-2 leftFix-contents">
   
     <div class="leftFix-configMenus">
@@ -147,7 +184,7 @@ include('../app/_parts/_header.php');
       <img class="iconImg img-thumbnail" src="../member_picture/<?php echo h($member['picture']); ?>">
     <?php endif; ?>
       <p><b><?php echo h($member['name']); ?></b></p>
-      <a class="openCommentModal btn btn-primary disabled" role="button" data-toggle="modal" data-target="#userPost-modal">投稿する</a>
+      <a class="openCommentModal btn btn-primary" role="button" data-toggle="modal" data-target="#userPost-modal">投稿する</a>
     </div>
   
   </nav> <!-- leftFix-contents -->
@@ -255,11 +292,23 @@ include('../app/_parts/_header.php');
   </nav>
   <?php endif; ?>
 
+  <!-- 
+    ログインユーザーへの挨拶
+   -->
+
+  <nav class="userGreeting col-md-10 offset-md-2 pt-3">
+    <div>
+      <span>
+        "<?= h($_POST['search']) ?>"が含まれる投稿の検索結果
+      </span>
+    </div>
+  </nav>
+
 
   <!-- 
    ユーザー投稿
    -->
-  <?php if ($post = $posts->fetch() ) : ?>
+  <?php foreach ($posts as $post) : ?>
   <?php if (empty($post['post_pic']) && empty($post['video']) ): ?>
   <main class="tweet-wrapper col-md-10 offset-md-2">
     <article class="container-fluid tweetContents">
@@ -324,11 +373,11 @@ include('../app/_parts/_header.php');
 
             <?php $goodFlag = in_array($post['id'], $goodArray); ?>
             <?php if ($goodFlag) : ?>
-              <a class="btn btn-danger btn-sm disabled" role="button" href="view.php?good=<?= h($post['id']); ?>">
+              <a class="btn btn-danger btn-sm disabled" role="button" href="search.php?good=<?= h($post['id']); ?>">
                 <i class="good fas fa-heart"></i> <?= h($post['good']); ?>
               </a>
             <?php else: ?>
-              <a class="btn btn-outline-danger btn-sm" role="button" href="view.php?good=<?= h($post['id']); ?>">
+              <a class="btn btn-outline-danger btn-sm" role="button" href="search.php?good=<?= h($post['id']); ?>">
                 <i class="good fas fa-heart"></i> <?= h($post['good']); ?>
               </a>
             <?php endif; ?>
@@ -435,11 +484,11 @@ include('../app/_parts/_header.php');
 
             <?php $goodFlag = in_array($post['id'], $goodArray); ?>
             <?php if ($goodFlag) : ?>
-              <a class="btn btn-danger btn-sm disabled" role="button" href="view.php?good=<?= h($post['id']); ?>">
+              <a class="btn btn-danger btn-sm disabled" role="button" href="search.php?good=<?= h($post['id']); ?>">
                 <i class="good fas fa-heart"></i> <?= h($post['good']); ?>
               </a>
             <?php else: ?>
-              <a class="btn btn-outline-danger btn-sm" role="button" href="view.php?good=<?= h($post['id']); ?>">
+              <a class="btn btn-outline-danger btn-sm" role="button" href="search.php?good=<?= h($post['id']); ?>">
                 <i class="good fas fa-heart"></i> <?= h($post['good']); ?>
               </a>
             <?php endif; ?>
@@ -508,7 +557,7 @@ include('../app/_parts/_header.php');
   </main>
   <?php endforeach; ?> <!-- コメントに対してのforeach -->
 
-  <?php endif; ?> <!-- 一つの投稿に対してのendif -->
+  <?php endforeach; ?> <!-- 一つの投稿に対してのforeach -->
 
 
   <!-- 
@@ -517,10 +566,29 @@ include('../app/_parts/_header.php');
 
   <nav class="col-md-10 offset-md-2 page-wrapper" aria-label="ページネーション">
     <ul class="pagination">
+      <?php if ($page > 1) : ?>
+      <li class="page-item">
+        <a class="page-link" href="search.php?page=<?= $page - 1 ?>">前</a>
+      </li>
+      <?php else: ?>
+      <li class="page-item disabled">
+        <a class="page-link">前</a>
+      </li>
+      <?php endif; ?>
 
       <li class="page-item">
-        <a class="page-link mt-5" href="index.php">topに戻る</a>
+        <a class="page-link" href="index.php">top</a>
       </li>
+
+      <?php if ($page < $maxPage) : ?>
+      <li class="page-item">
+        <a class="page-link" href="search.php?page=<?= $page + 1 ?>">次</a>
+      </li>
+      <?php else: ?>
+        <li class="page-item disabled">
+          <a class="page-link">次</a>
+        </li>
+      <?php endif; ?>
 
     </ul>
   </nav>
@@ -538,7 +606,7 @@ include('../app/_parts/_header.php');
 
 <!-- 
   レスポンシブフッターメニュー
--->
+  -->
 
 <nav class="responsive-footerMenus bg-dark">
   <a href="index.php" class="text-white"><i class="fas fa-home"></i></a>
@@ -547,15 +615,9 @@ include('../app/_parts/_header.php');
   <a href="userpage.php" class="text-white"><i class="fas fa-user-alt"></i></a>
 </nav>
 
-<!-- 
-  レスポンシブ投稿ボタン
--->
-
-<a class="btn btn-outline-primary responsive-postButton btn-lg d-none" role="button" data-toggle="modal" data-target="#userPost-modal">
+<a class="btn btn-outline-primary responsive-postButton btn-lg" role="button" data-toggle="modal" data-target="#userPost-modal">
   <i class="fas fa-pencil-alt"></i>
 </a>
-
-
 
 <!-- 
   レスポンシブ検索モーダル

@@ -378,7 +378,7 @@ include('../app/_parts/_header.php');
             <?php endif; ?>
 
             <?php if ($_SESSION['id'] == $post['member_id']) : ?>
-              <a class="btn btn-outline-primary btn-sm ml-2" role="button" href="delete.php?id=<?= h($post['id']); ?>">
+              <a class="btn btn-outline-primary btn-sm ml-2" role="button" href="../app/delete.php?id=<?= h($post['id']); ?>">
                 <i class="fas fa-trash"></i>
               </a>
             <?php endif; ?>
@@ -489,7 +489,7 @@ include('../app/_parts/_header.php');
             <?php endif; ?>
 
             <?php if ($_SESSION['id'] == $post['member_id']) : ?>
-              <a class="btn btn-outline-primary btn-sm ml-2" role="button" href="delete.php?id=<?= h($post['id']); ?>">
+              <a class="btn btn-outline-primary btn-sm ml-2" role="button" href="../app/delete.php?id=<?= h($post['id']); ?>">
                 <i class="fas fa-trash"></i>
               </a>
             <?php endif; ?>
@@ -540,7 +540,7 @@ include('../app/_parts/_header.php');
           <span class="font-weight-bold"><?= h($revPost['name']); ?></span>
           <span><small>[<?= h($revPost['created']); ?>]</small></span>
           <?php if ($_SESSION['id'] == $revPost['member_id']) : ?>
-            <a class="btn btn-outline-primary btn-sm ml-2 comment-deleteBtn" role="button" href="delete.php?id=<?= h($revPost['id']); ?>">
+            <a class="btn btn-outline-primary btn-sm ml-2 comment-deleteBtn" role="button" href="../app/deleteReview.php?id=<?= h($revPost['id']); ?>">
             <i class="fas fa-trash mr-2"></i>
           </a>
           <?php endif; ?>
