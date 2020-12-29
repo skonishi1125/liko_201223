@@ -408,19 +408,34 @@ index.php
 }
 
 
+/* 
+-----
+changeIcon.phpなど
+-----
+ */
+
+
+.changeIcon-form {
+  font-size: 90%;
+}
+
+.check-iconImg {
+  object-fit: cover;
+  width:80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+
+
 
 
 
 /* 
---------------
+------------------------------------------
 レスポンシブ(col-md基準)
---------------
+------------------------------------------
 */
-
-
-
-
-
 
 @media screen and (max-width: 973px) {
   /* leftFix-configMenusの文字調節用 */
@@ -629,8 +644,6 @@ index.php
     display: inline;
     background-color:#343A40;
   }
-
-  
 
 
 }
