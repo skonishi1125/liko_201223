@@ -463,7 +463,7 @@ include('../app/_parts/_header.php');
                 </small>
               </div>
 
-              <button type="submit" class="btn btn-primary float-right">投稿</button>
+              <button type="submit" class="btn btn-primary btn-sm float-right">投稿</button>
 
 
             </form>
@@ -506,9 +506,11 @@ include('../app/_parts/_header.php');
     <?php endif; ?>
     <!-- ビデオエラー -->
     <?php if($error['video'] == 'type'): ?>
-      <p>・URLに誤りがあります。現状YouTube動画のみの対応となっています。</p>
-      <p>　投稿例：https://www.youtube.com/watch?v=ABCDEFGHIJK</p>
-      <p>　(URLの末尾がv=[動画のID]で終わるように投稿してください)</p>
+      <p>
+        ・URLに誤りがあります。現状YouTube動画のみの対応となっています。<br>
+        　投稿例：https://www.youtube.com/watch?v=ABCDEFGHIJK<br>
+        　(URLの末尾がv=[動画のID]で終わるように投稿してください)
+      </p>
     <?php endif; ?>
   </nav>
   <?php endif; ?>
@@ -774,9 +776,11 @@ include('../app/_parts/_header.php');
         <div class="col-md-10">
           <span class="font-weight-bold"><?= h($revPost['name']); ?></span>
           <span><small>[<?= h($revPost['created']); ?>]</small></span>
-          <a class="btn btn-outline-primary btn-sm ml-2" role="button" href="delete.php?id=<?= h($post['id']); ?>">
-                <i class="fas fa-trash mr-2"></i>削除する
+          <?php if ($_SESSION['id'] == $revPost['member_id']) : ?>
+            <a class="btn btn-outline-primary btn-sm ml-2 comment-deleteBtn" role="button" href="delete.php?id=<?= h($revPost['id']); ?>">
+            <i class="fas fa-trash mr-2"></i>
           </a>
+          <?php endif; ?>
           <p><?= nl2br(makeLink(h($revPost['comment']) ) ); ?></p>
         </div>
       </div>
@@ -826,12 +830,27 @@ include('../app/_parts/_header.php');
    -->
 
   <footer class="col-md-10 offset-md-2 footer-credit mt-5">
-    <p>©️2020-2021 skonishi.</p>
+    <p style="color: #666;">©️2020-2021 skonishi.</p>
   </footer>
 
 
 </div> <!-- container-fluid -->
 
+<!-- 
+  レスポンシブフッターメニュー
+  -->
+
+<nav class="responsive-footerMenus bg-dark">
+  <a href="index.php" class="text-white"><i class="fas fa-home"></i></a>
+  <a href="../app/logout.php" class="text-white"><i class="fas fa-search"></i></a>
+  <a href="changeIcon.php" class="text-white"><i class="fas fa-cog"></i></a>
+  <a href="userpage.php" class="text-white"><i class="fas fa-user-alt"></i></a>
+
+</nav>
+
+<a class="btn btn-outline-primary responsive-postButton btn-lg" role="button" data-toggle="modal" data-target="#userPost-modal">
+  <i class="fas fa-pencil-alt"></i>
+</a>
 
 
 
@@ -840,3 +859,19 @@ include('../app/_parts/_header.php');
 include('../app/_parts/_footer.php');
 
 ?>
+
+<!-- 
+      <a href="index.php"><i class="fas fa-home"></i>ホーム</a>
+      <a href="userpage.php"><i class="fas fa-user-alt"></i>マイページ</a>
+      <a href="changeIcon.php"><i class="fas fa-cog"></i>アイコンの変更</a>
+      <a href="../app/logout.php"><i class="fas fa-sign-out-alt"></i>ログアウト</a>
+
+
+        <nav class="responsive-footerMenus">
+    <a class="btn btn-sm btn-dark" role="button" href="index.php"><i class="fas fa-home"></i></a>
+    <a class="btn btn-sm btn-dark" role="button" href="../app/logout.php"><i class="fas fa-sign-out-alt"></i></a>
+    <a class="btn btn-sm btn-dark" role="button" href="changeIcon.php"><i class="fas fa-cog"></i></a>
+    <a class="btn btn-sm btn-dark" role="button" href="userpage.php"><i class="fas fa-user-alt"></i></a>
+  </nav>
+
+ -->

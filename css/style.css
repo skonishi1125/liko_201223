@@ -259,6 +259,7 @@ index.php
 .tweet-wrapper {
   margin-bottom: 20px;
   padding-bottom: 20px;
+  word-break: break-all;
 }
 
 .tweetContents {
@@ -344,6 +345,8 @@ index.php
   border: 2px solid rgba(255,205,73,1);
   border-radius: 10px;
   position: relative;
+  word-break: break-all;
+  padding: 0px 20px;
 }
 
 .borderTriangle{
@@ -368,6 +371,13 @@ index.php
   border-left: 20px solid transparent;
 }
 
+.comment-deleteBtn {
+  padding-right: 0;
+  position: relative;
+  right: 43px;
+  float: right;
+}
+
 /* 
 ページネーション
 */
@@ -378,6 +388,19 @@ index.php
 
 
 /* 
+レスポンシブフッターメニュー
+*/
+
+.responsive-footerMenus {
+  display: none;
+}
+.responsive-postButton {
+  display: none;
+}
+
+
+
+/* 
 フッタークレジット
 */
 
@@ -385,11 +408,20 @@ index.php
   text-align: center;
 }
 
+
+
+
+
 /* 
 --------------
 レスポンシブ(col-md基準)
 --------------
 */
+
+
+
+
+
 
 @media screen and (max-width: 973px) {
   /* leftFix-configMenusの文字調節用 */
@@ -447,6 +479,7 @@ index.php
   index.php
   -----
   */
+  
 
   .leftFix-contents {
     display: none;
@@ -461,23 +494,124 @@ index.php
     margin-top: 25px;
   }
 
+  /* 
+  エラーモーダルの大きさ調整
+  */
+  .error-wrapperLength {
+    font-size: 85%;
+  }
+
+  .error-wrapperLength h5{
+    font-size: 16px;
+  }
+
+  /*
+   投稿のスペースUP
+  */
+  .tweet-wrapper {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+
+  .tweetContents {
+    margin-top: 20px;
+    /* padding-left: 25px !important; */
+  }
+
+  .container-fluid  {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .comment-wrapper {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+
+  /* リアクションスペース */
+
+  .reaction-space {
+    position: relative;
+    top: -30px;
+    left: 15px;
+  }
+
   .comment-postButton {
+    position: relative;
+    top: 0;
+    left: 0;
+    float: right;
+  }
+
+  .comment-deleteBtn {
     position: static;
-}
+  }
 
-/* 投稿のスペースUP */
-.tweet-wrapper {
-  padding-right: 0px;
-  padding-left: 0px;
-}
+  .comment-border{
+    padding: 0px 30px;
+  }
 
-.tweetContents {
-  margin-top: 20px;
-}
+  /* 
+  レスポンシブフッターメニュー
+  */
 
-.container-fluid  {
-  padding-left: 15px;
-  padding-right: 15px;
-}
+  .responsive-footerMenus {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    z-index: 4;
+    text-align: center;
+  }
+
+  .responsive-footerMenus a {
+    width: 23%;
+    display: inline-block;
+    padding-top: 6px;
+    padding-bottom: 100%;
+    font-size: 120%;
+  }
+
+  .responsive-postButton {
+    display: block;
+    position: fixed;
+    right: 35px;
+    bottom: 70px;
+    z-index: 5;
+    background-color: white;
+    padding-bottom: 10px;
+  }
+
+  /* 
+  投稿モーダルの大きさ調整
+  */
+
+  #userPost-modal {
+    font-size: 90%;
+  }
+
+  #userPost-modal input, #userPost-modal textarea{
+    font-size: 90%;
+  }
+
+  .modal-header {
+    padding-top: 10px;
+    padding-bottom: 5px;
+  }  
+  
+
+  /* 
+  フッタークレジット
+  */
+  .footer-credit {
+    margin-bottom: 50px;
+  }
+
+  .indexHeader-bar {
+    display: inline;
+    background-color:#343A40;
+  }
+
 
 }
