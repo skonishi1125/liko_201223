@@ -3,7 +3,6 @@ session_start();
 
 // 2階層上のappフォルダに取りに行く
 require('../../app/dbconnect.php');
-
 require('../app/functions.php');
 
 

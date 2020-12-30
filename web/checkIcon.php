@@ -19,7 +19,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time() ) {
 }
 
 //URL直接記入できた場合、追い返す
-if(!isset($_SESSION['join'])){
+if (!isset($_SESSION['join'])) {
   header('Location: http://localhost:8888/liko_201223/web/index.php');
   exit();
 }
@@ -115,13 +115,16 @@ if(!empty($_POST)) {
   ));
 
   unset($_SESSION['join']);
+  // changeResult.phpにURL記入で繋げなくする処理
+  $_SESSION['changeThanks'] = "true";
 
   header('Location: http://localhost:8888/liko_201223/web/changeResult.php');
   exit();
 
 }
 
-
+//アイコン用のext取得
+$iconExt = substr($member['picture'],-4);
 
 /* 
 ヘッダーファイル読み込み
@@ -203,6 +206,7 @@ include('../app/_parts/_header.php');
         <a class="btn btn-outline-primary btn-sm mr-5" role="button" href="changeIcon.php">
           戻る
         </a>
+        <input type="hidden" name="action" value="submit">
         <button class="btn btn-primary btn-sm" type="submit">設定する</button>
       </div>
     </form>
