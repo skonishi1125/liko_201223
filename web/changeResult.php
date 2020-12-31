@@ -106,8 +106,7 @@ include('../app/_parts/_header.php');
       </li>
     </ul>
   </nav>
-
-
+  
 
   <!-- 
     フッタークレジット
