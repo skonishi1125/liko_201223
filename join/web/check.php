@@ -18,58 +18,9 @@ if($_SESSION['join']['image'] != $_SESSION['join']['time'].$defHash){
   $imageName = $_SESSION['join']['image'];
   list($width, $height, $type, $attr) = getimagesize('../../member_picture/'.$imageName);
 
-
-  $newWidth = 0;//新横幅
-  $newHeight = 0;//新縦幅
-  $w = 100;//最大横幅
-  $h = 100;//最大縦幅
-
-  if($h < $height && $w < $width){
-    if($w < $h){
-      $newWidth = $w;
-      $newHeight = $height * ($w / $width);
-    } else if($h < $w) {
-      $newWidth = $width * ($h / $height);
-      $newHeight = $h;
-    }else{
-      if($width < $height){
-        $newWidth = $width * ($h / $height);
-        $newHeight = $h;
-      }else if($height < $width){
-        $newWidth = $w;
-        $newHeight = $height * ($w / $width);
-      }else if($height == $width){
-        $newWidth = $w;
-        $newHeight = $h;
-      }
-    }
-  }else if($height < $h && $width < $w){
-      $newWidth = $width;
-      $newHeight = $height;
-  }else if($h < $height && $width <= $w){
-      $newWidth = $width * ($h / $height);
-      $newHeight = $h;
-  }else if($height <= $h && $w < $width){
-      $newWidth = $w;
-      $newHeight = $height * ($w / $width);
-  }else if($height == $h && $width < $w){
-      $newWidth = $width * ($h / $height);
-      $newHeight = $h;
-  }else if($height < $h && $width == $w){
-      $newWidth = $w;
-      $newHeight = $height * ($w / $width);
-  }else{
-      $newWidth = $width;
-      $newHeight = $height;
-  }
-
-
-  // // 関数使用
-  // $ans = iconResize($width, $height);
-  // // 値の格納
-  // $newWidth = ans[0];   //新横幅
-  // $newHeight = ans[1];  //新縦幅
-
+  //リサイズ処理
+  list($newWidth, $newHeight) = iconResize($width, $height, 100, 100);
+  
   // 4文字の拡張子調整
   $ext = substr($imageName,-4);
   if($ext == 'jpeg' || $ext == 'JPEG'){
