@@ -10,6 +10,7 @@ return mb_ereg_replace("(https?)(://[[:alnum:]\+\$\;\?\.%,!#~*/:@&=_-]+)" , '<a 
 // join/web/check.phpに利用
 // アイコン画像のリサイズ。100px * 100pxに
 function iconResize($width, $height) {
+
   $newWidth = 0;//新横幅
   $newHeight = 0;//新縦幅
   $w = 100;//最大横幅
@@ -54,7 +55,7 @@ function iconResize($width, $height) {
       $newHeight = $height;
   }
 
-  $array = array($newWidth, $newHeight, $w, $h);
+  $array = array($newWidth, $newHeight);
   return $array;
 
 }

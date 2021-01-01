@@ -73,10 +73,6 @@ if ($_REQUEST['action'] == 'rewrite') {
 }
 
 
-// エラーチェック
-// foreach ($error as $key => $e) {
-//   echo "$errorの中身：" . $key . ":" . $e." |";
-// }
 
 include('../app/_parts/_header.php');
 
@@ -499,33 +495,6 @@ include('../app/_parts/_header.php');
 </div> <!-- background-white  -->
 
 
-
 <?php
 include('../app/_parts/_footer.php');
-
-// モーダルめも
-/*
-
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">ボタンです</button>
-<nav class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">タイトル</h5>
-        <!-- 閉じるアイコン -->
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <!-- モーダル 本文 -->
-      <div class="modal-body">本文が入ります</div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-      </div>
-    </div>
-  </div>
-</nav>
-
-*/
-
 ?>

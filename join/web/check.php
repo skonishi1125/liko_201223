@@ -67,8 +67,8 @@ if($_SESSION['join']['image'] != $_SESSION['join']['time'].$defHash){
   // // 関数使用
   // $ans = iconResize($width, $height);
   // // 値の格納
-  // $newWidth = (int)ans[0];//新横幅
-  // $newHeight = (int)ans[1];//新縦幅
+  // $newWidth = ans[0];   //新横幅
+  // $newHeight = ans[1];  //新縦幅
 
   // 4文字の拡張子調整
   $ext = substr($imageName,-4);
