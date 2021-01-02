@@ -6,17 +6,7 @@ require('../app/functions.php');
 // 
 // ログイン確認
 // 
-if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time() ) {
-  $_SESSION['time'] = time();
-  $members = $db->prepare('SELECT * FROM members WHERE id=?');
-  $members->execute(array($_SESSION['id']));
-
-  $member = $members->fetch();
-  // loginでmemberを識別するidをsessionに入れることで、他のファイルでも使用できるようにする
-} else {
-  header('Location: http://localhost:8888/liko_201223/web/login.php');
-  exit();
-}
+require('../app/_parts/_checkLogin.php');
 
 
 /*
@@ -184,7 +174,7 @@ include('../app/_parts/_header.php');
       <img class="iconImg img-thumbnail" src="../member_picture/<?php echo h($member['picture']); ?>">
     <?php endif; ?>
       <p><b><?php echo h($member['name']); ?></b></p>
-      <a class="openCommentModal btn btn-primary" role="button" data-toggle="modal" data-target="#userPost-modal">投稿する</a>
+      <a class="openCommentModal btn btn-primary disabled" role="button" data-toggle="modal" data-target="#userPost-modal">投稿する</a>
     </div>
   
   </nav> <!-- leftFix-contents -->
@@ -615,7 +605,7 @@ include('../app/_parts/_header.php');
   <a href="userpage.php" class="text-white"><i class="fas fa-user-alt"></i></a>
 </nav>
 
-<a class="btn btn-outline-primary responsive-postButton btn-lg" role="button" data-toggle="modal" data-target="#userPost-modal">
+<a class="btn btn-outline-primary responsive-postButton btn-lg d-none" role="button" data-toggle="modal" data-target="#userPost-modal">
   <i class="fas fa-pencil-alt"></i>
 </a>
 
