@@ -50,39 +50,9 @@ if (isset($_REQUEST['res'])){
   $message = '>>@' . $table['name']. '[' . $table['id'] . '] ';
 }
 
-$goodPosts = $db->prepare('SELECT post_id FROM goods WHERE member_id=?');
-$goodPosts->bindParam(1, $member['id'], PDO::PARAM_INT);
-$goodPosts->execute();
-
-
 //いいねボタンが押された時の処理
-//初期goodを最初に取得しておく
-$origins = $db->prepare('SELECT good FROM posts WHERE id=?');
-$origins->execute(array(
-  $_REQUEST['good']
-));
-$origin = $origins->fetch();
-$defGood = $origin['good'];
-
-if (isset($_REQUEST['good'])) {
-  $good = $db->prepare('UPDATE posts SET good=?, modified=NOW() WHERE id=?');
-  $defGood = $defGood + 1;
-  echo $retGood = $good->execute(array(
-    $defGood, $_REQUEST['good'],
-  ));
-
-  //いいねテーブルへの格納
-  $goodState = $db->prepare('INSERT INTO goods SET member_id=?, post_id=?,created=NOW()');
-  echo $goodRet = $goodState->execute(array(
-    $member['id'], $_REQUEST['good'],
-  ));
-
-  //echo $goodRetを使わない場合はこちらを採用する　$goodRet = $goodState->fetch();
-
-  header('Location: http://localhost:8888/liko_201223/web/userpage.php');
-  exit();
-
-}
+// addGoods / subGoods.php用
+$_SESSION['currentURI'] = $_SERVER['REQUEST_URI'];
 
 //コメント(review機能)
 if (isset($_POST['review'])) {
@@ -108,6 +78,19 @@ if ($_SESSION['review'] == 'blank'){
 
 //アイコン用のext取得
 $iconExt = substr($member['picture'],-4);
+
+
+
+// いいねテスト
+$_SESSION['currentURI'] = $_SERVER['REQUEST_URI'];
+
+
+
+
+
+
+
+
 
 
 /* 
@@ -229,14 +212,18 @@ include('../app/_parts/_header.php');
 
 
 
-
-  <?php //いいね処理
-  $i = 0;
-  $goodArray = array();
+   <?php
+  // いいね処理
+  // ログイン中のユーザーがどの投稿にいいねしているのかを格納
+  $goodPosts = $db->prepare('SELECT post_id FROM goods WHERE member_id=?');
+  $goodPosts->bindParam(1, $member['id'], PDO::PARAM_INT);
+  $goodPosts->execute();
+  
+  // どの投稿にいいねしているかの情報を取得
   while ($goodPost = $goodPosts->fetch() ){
-    $goodArray[$i] = $goodPost['post_id'];
-    $i++;
+    $goodArray[] = $goodPost['post_id'];
   };
+  
   ?>
 
   <!-- 
@@ -354,14 +341,14 @@ include('../app/_parts/_header.php');
 
           <div class="col-md-2 reaction-space">
             <!-- いいねボタン -->
-
-            <?php $goodFlag = in_array($post['id'], $goodArray); ?>
+            <!-- $goodArray(ユーザーがいいねしたログ)の中に、post idが含まれている時(いいね済みの時) -->
+            <?php $goodFlag = in_array($post['id'], $goodArray, true); ?>
             <?php if ($goodFlag) : ?>
-              <a class="btn btn-danger btn-sm disabled" role="button" href="userpage.php?good=<?= h($post['id']); ?>">
+              <a class="btn btn-danger btn-sm" role="button" href="../app/subGoods.php?good=<?= h($post['id']); ?>">
                 <i class="good fas fa-heart"></i> <?= h($post['good']); ?>
               </a>
             <?php else: ?>
-              <a class="btn btn-outline-danger btn-sm" role="button" href="userpage.php?good=<?= h($post['id']); ?>">
+              <a class="btn btn-outline-danger btn-sm" role="button" href="../app/addGoods.php?good=<?= h($post['id']); ?>">
                 <i class="good fas fa-heart"></i> <?= h($post['good']); ?>
               </a>
             <?php endif; ?>
@@ -465,14 +452,14 @@ include('../app/_parts/_header.php');
 
           <div class="col-md-2 reaction-space">
             <!-- いいねボタン -->
-
-            <?php $goodFlag = in_array($post['id'], $goodArray); ?>
+            <!-- $goodArray(ユーザーがいいねしたログ)の中に、post idが含まれている時(いいね済みの時) -->
+            <?php $goodFlag = in_array($post['id'], $goodArray, true); ?>
             <?php if ($goodFlag) : ?>
-              <a class="btn btn-danger btn-sm disabled" role="button" href="userpage.php?good=<?= h($post['id']); ?>">
+              <a class="btn btn-danger btn-sm" role="button" href="../app/subGoods.php?good=<?= h($post['id']); ?>">
                 <i class="good fas fa-heart"></i> <?= h($post['good']); ?>
               </a>
             <?php else: ?>
-              <a class="btn btn-outline-danger btn-sm" role="button" href="userpage.php?good=<?= h($post['id']); ?>">
+              <a class="btn btn-outline-danger btn-sm" role="button" href="../app/addGoods.php?good=<?= h($post['id']); ?>">
                 <i class="good fas fa-heart"></i> <?= h($post['good']); ?>
               </a>
             <?php endif; ?>
