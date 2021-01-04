@@ -2,6 +2,9 @@
 session_start();
 require('../app/dbconnect.php');
 
+// どのURLから削除ボタンを押したか
+$url = $_SESSION['currentURI'];
+
 if(isset($_SESSION['id'])){
   $id = $_REQUEST['id'];
 
@@ -17,7 +20,7 @@ if(isset($_SESSION['id'])){
   }
 }
 
-header('Location: http://localhost:8888/liko_201223/web/index.php');
+header('Location: ' . $url);
 exit();
 
 ?>
