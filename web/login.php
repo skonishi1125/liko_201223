@@ -3,28 +3,60 @@ session_start();
 require('../app/dbconnect.php');
 require('../app/functions.php');
 
+$test = 'session value';
+// setcookie('sessionid', '', time() - 3600, '/');
+// setcookie('test', $test, time() + 3600, '/');
+
 // 自動ログイン処理
 // 空の入力値のハッシュ
 // e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-if ($_COOKIE['sessionid'] != '') {
-  $cookieLogin = $db->prepare('SELECT * FROM members WHERE session_id=?');
-  $cookieLogin->execute(array($_COOKIE['sessionid']));
-  $member = $cookieLogin->fetch();
+// if ($_COOKIE['sessionid'] != '') {
+//   $cookieLogin = $db->prepare('SELECT * FROM members WHERE session_id=?');
+//   $cookieLogin->execute(array($_COOKIE['sessionid']));
+//   $member = $cookieLogin->fetch();
 
-  $_POST['email'] = $member['email'];
-  $_POST['save'] = 'on';
+//   $_POST['save'] = 'on';
+//   $_POST['email'] = $member['email'];
+
+//   if ($member) {
+//     $_SESSION['id'] = $member['id'];
+//     $_SESSION['time'] = time();
+//     $sessionid = hash('sha256', $_POST['email']);
+
+//     setcookie('sessionid', $sessionid, time() + 60 * 60 * 24 * 14);
+
+//     header('Location: http://localhost:8888/liko_201223/web/index.php');
+//     exit();
+//   }
+// }
+
+if ($_COOKIE['test'] != '') {
+  $cLog = $db->prepare('SELECT * FROM members WHERE session_id=?');
+  $cLog->execute(array($_COOKIE['test']));
+  $member = $cLog->fetch();
 
   if ($member) {
     $_SESSION['id'] = $member['id'];
     $_SESSION['time'] = time();
-    $sessionid = hash('sha256', $_POST['email']);
+    $sID = hash('sha256', $member['email']);
 
-    setcookie('sessionid', $sessionid, time() + 60 * 60 * 24 * 14);
+    setcookie('test', $sID, time() - 3600, '/');
 
     header('Location: http://localhost:8888/liko_201223/web/index.php');
     exit();
+    
   }
+
 }
+
+if ($_COOKIE['email'] != '') {
+  $_POST['email'] = $_COOKIE['email'];
+  $_POST['password'] = $_COOKIE['password'];
+  $_POST['save'] = 'on';
+}
+
+
+
 
 if (!empty($_POST)) {
   // 両方のフォームが記入されている時
@@ -43,8 +75,13 @@ if (!empty($_POST)) {
       $sessionid = hash('sha256', $_POST['email']);
       //自動ログインボックス有効時 onはinput value="on"で設定したから。
       if($_POST['save'] == 'on'){
-        setcookie('sessionid', $sessionid ,time()+60*60*24*14);
+        // setcookie('sessionid', $sessionid, time()+60*60*24*14); 
+        // setcookie('test', $sessionid, time() + 60 * 60 *24 * 14);
         //直で2番目の値にhash関数を入れてはいけない
+
+        setcookie('email', $_POST['email'], time()+60*60*24*14);
+        setcookie('password', $_POST['password'], time()+60*60*24*14);
+
       }
   
       header('Location: http://localhost:8888/liko_201223/web/index.php');
