@@ -654,7 +654,7 @@ include('../app/_parts/_header.php');
   <a href="index.php" class="text-white"><i class="fas fa-home"></i></a>
   <a data-toggle="modal" data-target="#searchModal" class="text-white"><i class="fas fa-search"></i></a>
   <a data-toggle="modal" data-target="#configModal" class="text-white"><i class="fas fa-cog"></i></a>
-  <a href="userpage.php" class="text-white"><i class="fas fa-user-alt"></i></a>
+  <a href="userpage.php?id=<?= h($member['id']); ?>" class="text-white"><i class="fas fa-user-alt"></i></a>
 </nav>
 
 <a class="btn btn-outline-primary responsive-postButton btn-lg d-none" role="button" data-toggle="modal" data-target="#userPost-modal">
