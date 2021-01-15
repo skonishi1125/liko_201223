@@ -81,7 +81,7 @@ include('../app/_parts/_header.php');
 
   <nav class="userGreeting col-md-10 offset-md-2 pt-3">
     <div>
-      <span>アイコンを変更しました。</span>
+      <span>設定を変更しました。</span>
     </div>
   </nav>
 

@@ -9,34 +9,17 @@ require('../app/functions.php');
 require('../app/_parts/_checkLogin.php');
 
 
-if (!empty($_FILES)) {
-  $fileName = $_FILES['image']['name'];
-  if (!empty($fileName)) {
-    $ext = substr($fileName, -4);
-    if ($ext != '.jpg' && $ext !='.png' && $ext !='.PNG' && $ext !='.gif' && $ext != 'JPEG' && $ext != 'jpeg' && $ext != '.JPG') {
-      $error['image'] = 'type';
-    }
-  }
+if (!empty($_POST)) {
+  $statement = $db->prepare('UPDATE userpages SET region=?, introduce=?, modified=NOW() WHERE member_id=?');
+  echo $ret = $statement->execute(array(
+    $_POST['region'], $_POST['introduce'], $member['id'],
+  ));
 
-  if (empty($error)) {
-      $postImgTime = date('YmdHis');
-      if ($ext == 'jpeg' || $ext == 'JPEG') {
-          $ext = '.' . $ext;
-      }
-      $_SESSION['ext'] = $ext;
+  // changeResult.phpにURL記入で繋げなくする処理
+  $_SESSION['changeThanks'] = "true";
 
-      $image = $postImgTime . sha1($_FILES['image']['name']).$ext; 
-      
-      move_uploaded_file($_FILES['image']['tmp_name'], '../member_picture/'.$image);
-
-      $_SESSION['join'] = $_POST;
-      $_SESSION['join']['image'] = $image;
-      $_SESSION['join']['time'] = $postImgTime;
-
-      header('Location: http://localhost:8888/liko_201223/web/checkIcon.php');
-      exit();
-
-  }
+  header('Location: http://localhost:8888/liko_201223/web/changeResult.php');
+  exit();
 
 }
 
@@ -131,20 +114,36 @@ include('../app/_parts/_header.php');
 
   <nav class="userGreeting col-md-10 offset-md-2 pt-3">
     <div>
-      <span>アイコンを変更する</span>
+      <span>プロフィールを設定する</span>
     </div>
   </nav>
 
   <nav class="col-md-10 offset-md-2 my-4 pb-3">
-    <form action="" method="post" enctype="multipart/form-data">
-      <div class="form-group changeIcon-form">
-        <input type="file" name="image" id="image" class="form-control-file"> 
-        <small id="imageHelp" class="form-text text-muted">
-          未記入の場合、デフォルト画像が設定されます。<br>
-          画像の拡張子は「.jpg」「.png」「.gif」が設定可能です。
-        </small>
+    <form action="" method="post">
+      <div class="form-group">
+        <label for="region">地域</label>
+        <select class="form-control" id="region" name="region">
+          <!-- 前回設定した値をselected(初期値)に設定する 三項演算子 -->
+          <?php print( ($userpage['region']) == "日本" ? "<option selected>日本</option>" : "<option>日本</option>"); ?>
+          <?php print( ($userpage['region']) == "北海道" ? "<option selected>北海道</option>" : "<option>北海道</option>"); ?>
+          <?php print( ($userpage['region']) == "東北" ? "<option selected>東北</option>" : "<option>東北</option>"); ?>
+          <?php print( ($userpage['region']) == "関東" ? "<option selected>関東</option>" : "<option>関東</option>"); ?>
+          <?php print( ($userpage['region']) == "中部" ? "<option selected>中部</option>" : "<option>中部</option>"); ?>
+          <?php print( ($userpage['region']) == "近畿" ? "<option selected>近畿</option>" : "<option>近畿</option>"); ?>
+          <?php print( ($userpage['region']) == "中国地方" ? "<option selected>中国地方</option>" : "<option>中国地方</option>"); ?>
+          <?php print( ($userpage['region']) == "四国" ? "<option selected>四国</option>" : "<option>四国</option>"); ?>
+          <?php print( ($userpage['region']) == "九州" ? "<option selected>九州</option>" : "<option>九州</option>"); ?>
+          <?php print( ($userpage['region']) == "その他" ? "<option selected>その他</option>" : "<option>その他</option>"); ?>
+        </select>
       </div>
-      <button type="submit" class="btn btn-primary btn-sm float-right">確認画面へ</button>
+
+      <div class="form-group">
+        <label for="introduce">プロフィールコメントを編集</label>
+        <textarea class="form-control" id="introduce" rows="5" name="introduce"><?= h($userpage['introduce']); ?></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-sm float-right">変更する</button>
+
     </form>
   </nav>
 
