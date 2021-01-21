@@ -1,5 +1,5 @@
 $(function() {
-  console.log('接続テスト');
+  // console.log('接続テスト');
 
   $('.contents-cancelGoodBtn').click(function() {
     var $likediv =$(this).parent("div");
@@ -17,8 +17,7 @@ $(function() {
       memberid: ccGB_memberid,
     }, function(data){
       // $(this).find("span").html(data);
-      // 1.親のdivの中のspanを探す 親=$likediv. 子はccGBとcaGBの2人
-      // 上やめた クリックしたaの中の各クラスにデータセット
+      // クリックしたaの中の各クラスにデータセット
 
       $ccGB_goodNumberSpace.html(data);
       $caGB_goodNumberSpace.html(data);
@@ -48,12 +47,5 @@ $(function() {
       $caGB_btn.toggleClass('d-none');
     });
   });
-
-    // $('.ccGB_goodNumberSpace').html(data);
-    // $('.caGB_goodNumberSpace').html(data);
-
-  // 今
-  // 全てのコンテンツ投稿のいいねが共有された状態
-  // これを個別にしたいわけ
 
 });
